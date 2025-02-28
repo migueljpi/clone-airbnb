@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  LANGUAGES = ["English", "French", "Spanish", "German", "Italian", "Japanese", "Korean", "Mandarin", "Portuguese", "Russian", "Simplified Chinese", "Traditional Chinese", "Vietnamese"]
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :bookings, dependent: :destroy

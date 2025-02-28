@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   # Defines the routes for the posts resource
-  resources :tours, only: [:index, :show]
+  resources :tours, only: [:show] do
+    resources :bookings, only: [:new, :create]
+  end
   get "users/:id" => "users#show", as: :user
 
 

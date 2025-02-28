@@ -17,7 +17,6 @@ class BookingsController < ApplicationController
       redirect_to root_path, notice: "Booking was successfully created."
     else
       render :new, status: :unprocessable_entity
-      p @booking.errors
     end
   end
 

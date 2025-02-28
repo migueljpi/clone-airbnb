@@ -1,12 +1,14 @@
 <h1>PLACEHOLDER SHOW</h1>
 
-<%= @tour.name %>
+<p><%= @tour.name %></p>
 
-<%= @tour.description %>
+<p><%= @tour.description %></p>
 
-<%= @tour.price %>
+<p><%= @tour.price %></p>
 
-<%= @tour.location %>
+<p><%= @tour.location %></p>
+
+<p><%= link_to "Tour Guide: #{@tour.user.first_name} #{@tour.user.last_name}", user_path(@tour.user) %></p>
 
 <p><%= link_to "BOOK THIS TOUR!!!", new_tour_booking_path(@tour) %></p>
 

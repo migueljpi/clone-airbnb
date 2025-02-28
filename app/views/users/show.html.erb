@@ -6,3 +6,13 @@
 
 <%= link_to "Edit", edit_user_registration_path(@user) %>
 <%= link_to "Index", root_path %>
+<%# BASIC LOGIC TO DISPLAY ONLY THE TOURS OF THE ACTIVE USER %>
+<% if current_user.id == @user.id %>
+  <% @user.bookings.each do |booking| %>
+    <p><%= booking.tour.name %></p>
+    <p><%= booking.date %></p>
+    <p><%= booking.pax %></p>
+  <% end %>
+<% else %>
+  <p>you are not authorized to view this user's bookings</p>
+<% end %>

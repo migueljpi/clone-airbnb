@@ -24,7 +24,7 @@
     <%= f.input :guide, checked_value: :true, unchecked_value: :false,
                 required: true,
                 input_html: { autocomplete: "guide" } %>
-    <%= f.input :language,
+    <%= f.input :language, collection: User::LANGUAGES,
                 required: true,
                 input_html: { autocomplete: "language" } %>
   </div>

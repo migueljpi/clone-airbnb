@@ -1,6 +1,8 @@
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
 <%= @user.first_name %>
+<p>are they a guide?<%= @user.guide %></p>
+<p>what language do they speak?<%= @user.language %></p>
 
 <%= link_to "Edit", edit_user_registration_path(@user) %>
 <%= link_to "Index", root_path %>

@@ -9,6 +9,7 @@ class Tour < ApplicationRecord
   validates :description, presence: true
   validates :duration_in_hours, presence: true, numericality: { only_integer: true }
   validates :price, presence: true, numericality: { only_integer: true }
-  validates :starting_time, presence: true
+  # validates :starting_time, presence: true
   validates :category, inclusion: { in: CATEGORIES, message: "%{value} is not a valid type" }
+
 end

@@ -1,0 +1,5 @@
+<%= simple_form_for [@tour, @booking], url: tour_bookings_path(@tour) do |f| %>
+  <%= f.input :date, as: :date, html5: true %>
+  <%= f.input :pax, input_html: { type: 'number', step: 1 } %>
+  <%= f.submit %>
+<% end %>

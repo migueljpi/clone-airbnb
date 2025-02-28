@@ -10,3 +10,7 @@
 <% else %>
   not logged in
 <% end %>
+
+<% @tours.each do |tour| %>
+  <p><%= link_to tour.name, tour_path(tour) %></p>
+<% end %>

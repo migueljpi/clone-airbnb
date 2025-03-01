@@ -45,7 +45,7 @@
 
 
 
-<%# <p> %>
+<%# <p>
   <%# <% if user_signed_in? %>
     <%# logged in as <%= current_user.first_name %>
     <%# <%= link_to "My Account", user_path(current_user) %>
@@ -61,7 +61,7 @@
   </div>
 </div>
 
-<hr>
+<hr> %>
 
 <div class="row mt-5">
   <% @tours.each do |tour| %>
@@ -78,6 +78,7 @@
           </div>
         </div>
       </div>
+
     <% end %>
   </div>
 

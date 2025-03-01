@@ -1,10 +1,51 @@
-<%# <h1>PLACEHOLDER INDEX</h1> %>
-<%# remove after testing %>
-<%# <%= link_to "log in", new_user_session_path %>
-<%# <%= link_to "sign up", new_user_registration_path %>
-<%# <%= link_to "log out", destroy_user_session_path, data: { turbo_method: :delete } %>
+<div class="container">
+  <h2 style="color: #1B435D;">FIND YOUR NEXT TOUR</h2>
+  <div class="col-12 col-lg-2">
+    <div class="search-filter">
+      <div class="search-filter-items">
+        <div class="search-tours">
+          <%= form_tag "/tours", method: "GET" do %>
+            <%= label_tag :location %>
+            <%= text_field_tag :location, params[:location] %>
+          <% end %>
+        </div>
+        <div class="search-language">
+          <%= form_tag "/users", method: "GET" do %>
+            <%= label_tag :language %>
+            <%= text_field_tag :language, params[:location] %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%# <p> %>
+<img src="/app/assets/images/tour_guide.jpg" alt="">
+
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
+  <div class="container">
+    <h1>Explore the world with your perfect guide!</h1>
+    <p>Change your life and get the most insightful experience with a local person.</p>
+    <%= link_to "Book now", "#", class: "btn btn-flat" %>
+  </div>
+</div>
+
+<%= cl_image_tag("annie-spratt-qyAka7W5uMY-unsplash_upnmkv", width: 400, height: 300, crop: :fill) %>
+
+<img src="/app/assets/images/tour_guide.jpg" alt="">
+
+
+
+
+<%# <div class="container user-login"> %>
+  <%#= link_to "log in", new_user_session_path %>
+  <%#= link_to "sign up", new_user_registration_path %>
+  <%#= link_to "log out", destroy_user_session_path, data: { turbo_method: :delete } %>
+<%# </div> %>
+
+
+
+<%# <p>
   <%# <% if user_signed_in? %>
     <%# logged in as <%= current_user.first_name %>
     <%# <%= link_to "My Account", user_path(current_user) %>
@@ -13,52 +54,31 @@
   <%# <% end %>
 <%# </p> %>
 
-<div class="row justify-content-center">
+<%# <div class="row justify-content-center">
   <div class="col-12 col-lg-2">
     <!-- This div is centered and takes 6 columns -->
     <h2 style="color: #1B435D;">search bar</h2>
   </div>
 </div>
 
-<hr>
-
-<div class="row mt-5">
-  <% 16.times do |i| %>
-
-      <div class="col-3">
-        <div class="card-trip m-3">
-          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
-          <div class="card-trip-infos">
-            <div>
-              <h2>Title here</h2>
-              <p>Short description here!</p>
-            </div>
-            <h2 class="card-trip-pricing">£99.99</h2>
-            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
-          </div>
-        </div>
-      </div>
-
-  <% end %>
-</div>
-
+<hr> %>
 
 <div class="row mt-5">
   <% @tours.each do |tour| %>
       <div class="col-3">
-        <div class="card-trip">
-          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+        <div class="card-trip m-3">
+          <%= image_tag(tour.photo)  %>
           <div class="card-trip-infos">
             <div>
-              <h2>Title here</h2>
-              <p>Short description here!</p>
+              <p><%= link_to tour.name, tour_path(tour) %></p>
+              <p><%= tour.description %></p>
             </div>
-            <h2 class="card-trip-pricing">£99.99</h2>
+            <h2 class="card-trip-pricing"><%= tour.price %>€</h2>
             <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
           </div>
         </div>
       </div>
-    <p><%= link_to tour.name, tour_path(tour) %></p>
+
     <% end %>
   </div>
 

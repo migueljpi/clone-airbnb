@@ -1,33 +1,63 @@
+<%# dark blue: #1B435D  %>
+<%# medium blue: #78BBE6 %>
+<%# light blue: #D5EEFF %>
+
 <div class="row">
-  <div class="col-4" style="background-color:rgba(179, 225, 255, 0.71);">
-    <p>This is where the picture will be</p>
-    <p>Name: <%= @user.first_name %></p> <!-- implement something here to show if they are a guide -->
-    <p>Language: <%= @user.language %></p>
-    <p>About me: <%= @user.about_me %></p>
-    <p>email: <%= @user.email %></p>
+  <div class="col-4 p-4" id="profile">
+    <div class="p-4 d-flex flex-column align-items-center" style="background-color: #78BBE6; border-radius: 15px">
+      <div class="mb-4">
+        <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :thumb, :radius => 150 %>
+      </div>
+
+
+      <div class="d-flex flex-column align-items-center mb-4">
+        <h2>
+          <%= @user.first_name %> <%= @user.last_name %>
+        </h2>
+        <% if @user.guide %>
+          <h3>Tour Guide</h3>
+        <% end %>
+      </div>
+      <p>Speaks: <%= @user.language %></p>
+
+      <p>About me: <%= @user.about_me %></p>
+    </div>
   </div>
 
-  <div class="col-8" style="background-color:rgba(255, 236, 225, 0.74);">
-    <%= render "user_bookings" %>
+  <div class="col-8 p-4" id="bookings">
+    <div class="p-4 d-flex flex-column align-items-center" style="background-color: #D5EEFF; border-radius: 15px">
+      <h2>My Tours</h2>
+      <%= render "tourist_bought_bookings" %>
+    </div>
   </div>
 </div>
   <%# ONLY FOR THE GUIDE %>
 <div class="row">
-  <div class="col-4" style="background-color:rgba(255, 104, 217, 0.71);">
-    <% if @user.guide && current_user.id == @user.id %>
-      <h2>THESE ARE THE TOURS YOU NEED TO APPROVE</h2>
-      <% @bookings.each do |booking| %>
-        <p>---------------------------------------------</p>
-        <p>Name of the tour: <%= booking.tour.name %></p>
-        <p>Date: <%= booking.date %></p>
-        <p>Client: <%= booking.user.first_name %></p>
-        <p>N of People: <%= booking.pax %></p>
-        <p>Status: <%= booking.status %></p>
-        <%= link_to "Approve", accept_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
-        <%= link_to "Decline", reject_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
+  <% if @user.guide && current_user.id == @user.id %>
+    <div class="col-12 p-4 mb-2" id="management" style="background-color: #1B435D; border-radius: 15px">
+      <h2>Booking management</h2>
+      <%= @user.bookings.each do |booking| %>
+        <div class="card-product">
+          <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" />
+          <div class="card-product-infos">
+            <h2><%= booking.tour.name %></h2>
+            <p><%= booking.date %></p>
+            <p><%= booking.pax %></p>
+            <p>Status: <%= booking.status %></p>
+            <%= link_to "Confirm", accept_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
+            <%= link_to "Deny", reject_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
+
+          </div>
+        </div>
       <% end %>
-    <% end %>
-  </div>
+
+
+
+      <div class="p-4 d-flex flex-column align-items-center">
+        <%= render "guide_booked_tours" %>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 

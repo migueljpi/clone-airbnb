@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
   get "users/:id" => "users#show", as: :user
 
-
-
+  get "bookings/:id/edit" => "bookings#edit", as: :booking_edit
+  patch "bookings/:id" => "bookings#update", as: :booking
+  delete "bookings/:id" => "bookings#destroy", as: :booking_destroy
 end

@@ -1,0 +1,11 @@
+
+<% @bookings.each do |booking| %>
+  <p>---------------------------------------------</p>
+  <p>Name of the tour: <%= booking.tour.name %></p>
+  <p>Date: <%= booking.date %></p>
+  <p>Client: <%= booking.user.first_name %></p>
+  <p>N of People: <%= booking.pax %></p>
+  <p>Status: <%= booking.status %></p>
+  <%= link_to "Confirm", accept_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
+  <%= link_to "Deny", reject_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
+<% end %>

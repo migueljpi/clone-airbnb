@@ -6,10 +6,10 @@
   <div class="form-inputs">
     <%= f.input :first_name,
                 required: true,
-                input_html: { autocomplete: "language" } %>
+                input_html: { autocomplete: "first_name" } %>
     <%= f.input :last_name,
                 required: true,
-                input_html: { autocomplete: "language" } %>
+                input_html: { autocomplete: "last_name" } %>
     <%= f.input :email,
                 required: true,
                 autofocus: true,
@@ -30,6 +30,9 @@
     <%= f.input :language, collection: User::LANGUAGES,
                 required: true,
                 input_html: { autocomplete: "language" } %>
+    <%= f.input :about_me,
+                required: true,
+                input_html: { autocomplete: "about_me" } %>
   </div>
 
   <div class="form-actions">

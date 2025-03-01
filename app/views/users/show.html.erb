@@ -4,29 +4,31 @@
     <p>Name: <%= @user.first_name %></p> <!-- implement something here to show if they are a guide -->
     <p>Language: <%= @user.language %></p>
     <p>About me: <%= @user.about_me %></p>
+    <p>email: <%= @user.email %></p>
   </div>
 
   <div class="col-8" style="background-color:rgba(255, 236, 225, 0.74);">
-    <% if current_user.id == @user.id %>
-      <% if @user.bookings.any? %>
-        <% @user.bookings.each do |booking| %>
-          <p>Tour: <%= booking.tour.name %></p>
-          <p>Date: <%= booking.date %></p>
-          <p>Nº of people: <%= booking.pax %></p>
-          <p><%= link_to "Edit Booking", booking_edit_path(booking) %></p>
-          <p><%= link_to "Cancel Booking", booking_destroy_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %></p>
-        <% end %>
-      <% else %>
-        <p>you have no bookings yet!</p>
-        <%= link_to "Book a tour", root_path%>
+    <%= render "user_bookings" %>
+  </div>
+</div>
+  <%# ONLY FOR THE GUIDE %>
+<div class="row">
+  <div class="col-4" style="background-color:rgba(255, 104, 217, 0.71);">
+    <% if @user.guide && current_user.id == @user.id %>
+      <h2>THESE ARE THE TOURS YOU NEED TO APPROVE</h2>
+      <% @bookings.each do |booking| %>
+        <p>---------------------------------------------</p>
+        <p>Name of the tour: <%= booking.tour.name %></p>
+        <p>Date: <%= booking.date %></p>
+        <p>Client: <%= booking.user.first_name %></p>
+        <p>N of People: <%= booking.pax %></p>
+        <p>Status: <%= booking.status %></p>
+        <%= link_to "Approve", accept_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
+        <%= link_to "Decline", reject_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
       <% end %>
-    <% else %>
-      <p>you are not authorized to view this user's bookings</p>
     <% end %>
   </div>
-
 </div>
-
 
 
 

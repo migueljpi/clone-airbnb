@@ -2,8 +2,11 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def show
+    @bookings = Booking.joins(:tour).where(tours: { user_id: @user.id }).order(updated_at: :desc).to_a
+    Rails.logger.debug "Bookings loaded for guide: #{@bookings.pluck(:id, :status)}"
 
   end
+
 
   private
 

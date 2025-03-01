@@ -1,0 +1,16 @@
+<% if current_user.id == @user.id %>
+      <% if @user.bookings.any? %>
+        <% @user.bookings.each do |booking| %>
+          <p>Tour: <%= booking.tour.name %></p>
+          <p>Date: <%= booking.date %></p>
+          <p>Nº of people: <%= booking.pax %></p>
+          <p><%= link_to "Edit Booking", booking_edit_path(booking) %></p>
+          <p><%= link_to "Cancel Booking", booking_destroy_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?"} %></p>
+        <% end %>
+      <% else %>
+        <p>you have no bookings yet!</p>
+        <%= link_to "Book a tour", root_path%>
+      <% end %>
+    <% else %>
+      <p>you are not authorized to view this user's bookings</p>
+    <% end %>

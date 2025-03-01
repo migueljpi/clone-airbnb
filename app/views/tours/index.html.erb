@@ -64,44 +64,22 @@
 <hr>
 
 <div class="row mt-5">
-  <% 16.times do |i| %>
-
-      <%# <div class="col-3">
-        <div class="card-trip m-3">
-          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
-          <div class="card-trip-infos">
-            <div>
-              <h2>Title here</h2>
-              <p>Short description here!</p>
-            </div>
-            <h2 class="card-trip-pricing">£99.99</h2>
-            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
-          </div>
-        </div>
-      </div>
-
-  <% end %>
-<%# </div>
-
-
-<div class="row mt-5">
   <% @tours.each do |tour| %>
-      <%# <div class="col-3">
-        <div class="card-trip">
-          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+      <div class="col-3">
+        <div class="card-trip m-3">
+          <%= image_tag(tour.photo)  %>
           <div class="card-trip-infos">
             <div>
-              <h2>Title here</h2>
-              <p>Short description here!</p>
+              <p><%= link_to tour.name, tour_path(tour) %></p>
+              <p><%= tour.description %></p>
             </div>
-            <h2 class="card-trip-pricing">£99.99</h2>
+            <h2 class="card-trip-pricing"><%= tour.price %>€</h2>
             <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
           </div>
         </div>
       </div>
-    <p><%= link_to tour.name, tour_path(tour)</p> %>
-    <%# <% end %>
-  <%# </div> %>
+    <% end %>
+  </div>
 
   <%# <h1>THESE ARE ALL THE USERS JUST FOR TESTING PURPOSES (we won't need them here)</h1>
   <% @users.each do |user| %>

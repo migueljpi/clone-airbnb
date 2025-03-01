@@ -7,10 +7,6 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore all environment files (except templates).
-/.env*
-!/.env*.erb
-
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
@@ -35,10 +31,8 @@
 /config/master.key
 
 # Ignore .env file containing credentials.
-.env*
+.env
 
 # Ignore Mac and Linux file system files
 *.swp
 .DS_Store
-.env*
-.env*

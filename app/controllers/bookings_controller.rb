@@ -14,10 +14,33 @@ class BookingsController < ApplicationController
     @booking.tour = @tour
     @booking.user = current_user
     if @booking.save
-      redirect_to root_path, notice: "Booking was successfully created."
+      redirect_to user_path(current_user), notice: "Booking was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @booking = Booking.find(params[:id])
+    @tour = @booking.tour
+  end
+
+  def update
+    @booking = Booking.find(params[:id])
+    if @booking.update(booking_params)
+      redirect_to user_path(current_user), notice: "Booking was successfully updated."
+      p "THIS HAS WORKED"
+    else
+      render :edit, status: :unprocessable_entity
+      p "THESE ARE THE ERRORS"
+      p @booking.errors.full_messages
+    end
+  end
+
+  def destroy
+    @booking = Booking.find(params[:id])
+    @booking.destroy
+    redirect_to user_path(current_user), notice: "Booking was successfully destroyed."
   end
 
   private

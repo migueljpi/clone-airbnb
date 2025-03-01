@@ -21,21 +21,31 @@ class BookingsController < ApplicationController
   end
 
   def accept
+    @booking = Booking.find(params[:id])
     if current_user == @booking.tour.user
       @booking.update(status: "Confirmed")
-      flash[:notice] = "Booking has been confirmed."
+      if @booking.save
+        flash[:notice] = "Booking has been confirmed."
+      else
+        flash[:alert] = "Failed to confirm booking."
+      end
     else
       flash[:alert] = "You are not authorized to accept this booking."
     end
-    redirect_to tour_bookings_path(@booking.tour)
+    redirect_to user_path(current_user)
   end
 
   def reject
+    @booking = Booking.find(params[:id])
     if current_user == @booking.tour.user
       @booking.update(status: "Denied")
-      flash[:notice] = "Booking has been denied."
+      if @booking.save
+        flash[:notice] = "Booking has been denied."
+      else
+        flash[:notice] = "Failed to deny booking."
+      end
     else
-      flash[:alert] = "You are not authorized to reject this booking."
+      flash[:notice] = "You are not authorized to reject this booking."
     end
     redirect_to tour_bookings_path(@booking.tour)
   end
@@ -82,6 +92,6 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:date, :pax)
+    params.require(:booking).permit(:date, :pax, :status)
   end
 end

@@ -1,0 +1,8 @@
+<% if @booking.status == "Pending" && current_user == @booking.tour.user %>
+  <%= link_to 'Accept', accept_tour_booking_path(@booking.tour, @booking), method: :patch, class: 'btn btn-success' %>
+  <%= link_to 'Reject', reject_tour_booking_path(@booking.tour, @booking), method: :patch, class: 'btn btn-danger' %>
+<% elsif @booking.status == "Confirmed" %>
+  <p>This booking has been confirmed!</p>
+<% elsif @booking.status == "Denied" %>
+  <p>This booking has been denied.</p>
+<% end %>

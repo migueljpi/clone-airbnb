@@ -3,6 +3,10 @@ class ToursController < ApplicationController
     @tours = Tour.all
     @user = current_user
     @users = User.all
+
+    if params[:search].present?
+      @tours = @tours.where("name LIKE ?", "%#{params[:search]}%")
+    end
   end
 
   def show

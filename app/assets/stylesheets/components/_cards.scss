@@ -70,3 +70,26 @@
 .card-product .card-product-infos {
   padding: 16px;
 }
+
+.card-trip-user-show {
+  width: 250px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card-trip-infos-user-show {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-trip-user-show img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}

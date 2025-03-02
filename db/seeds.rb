@@ -26,7 +26,7 @@ CATEGORIES = ["Walking Tour", "Van Tour", "Bus Tour", "Free Tour", "Boat Tour"]
 
 require 'faker'
 16.times do |i|
-  tour = Tour.new(user: User.find(2), name: Faker::Superhero.name, location: Faker::Address.city, description: Faker::Address.city, duration_in_hours: Faker::Number.within(range: 1..8), price: Faker::Number.within(range: 15..105), category: CATEGORIES.sample)
+  tour = Tour.new(user: User.find(8), name: "Tour in #{Faker::Address.city} with #{Faker::Superhero.name}", location: Faker::Address.city, description: Faker::Address.city, duration_in_hours: Faker::Number.within(range: 1..8), price: Faker::Number.within(range: 15..105), category: CATEGORIES.sample)
   photoUrl = "https://cdn.getyourguide.com/img/tour/02804a4e26cd4eaf7102b59fbeffc4fd14f80b48eb0af36e2dddeeb5b5ead364.jpg/98.jpg"
   tour.photo.attach(io: URI.open(photoUrl), filename: 'atenasAcropolis.png', content_type: 'image/png')
   tour.save!

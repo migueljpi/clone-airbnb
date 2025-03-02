@@ -1,4 +1,5 @@
-<div class="container">
+<div data-controller="remove" class="container">
+
   <h2 style="color: #1B435D;">FIND YOUR NEXT TOUR</h2>
   <div class="col-12 col-lg-2">
     <div class="search-filter">
@@ -7,47 +8,77 @@
           <%= form_with(url: root_path, method: :get, local: true) do %>
             <%= label_tag :search, "Search by location" %>
             <%= text_field_tag :search, params[:search], placeholder: "Search by location" %>
-            <%= submit_tag "Search" %>
+            <%#= submit_tag "Search" %>
+            <button data-action="click->remove#fire">Search</button>
           <% end %>
         </div>
       </div>
     </div>
   </div>
-</div>
-
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/background.png);">
-  <div class="container">
-    <h1>Explore the world with your perfect guide!</h1>
-    <p>Change your life and get the most insightful experience with a local person.</p>
-    <%= link_to "Book now", "#", class: "btn btn-flat" %>
+  <div class="mt-5" data-remove-target="removableElement">
+    <%= render "banner" %>
   </div>
+
 </div>
 
-<%#= cl_image_tag("annie-spratt-qyAka7W5uMY-unsplash_upnmkv", width: 400, height: 300, crop: :fill) %>
-
-<img src="/app/assets/images/tour_guide.jpg" alt="">
 
 
 
 
-<%#= cl_image_tag("annie-spratt-qyAka7W5uMY-unsplash_upnmkv", width: 400, height: 300, crop: :fill) %>
+
+  <div class="row mt-5">
+    <% @tours.each do |tour| %>
+      <div class="col-4">
+        <div class="card-trip m-3">
+          <%# image_tag(tour.photo) %>
+          <div class="card-trip-infos">
+            <div class="card-trip-description">
+              <div>
+                <p><%= link_to tour.name, tour_path(tour) %></p>
+                <p><%= tour.description %></p>
+              </div>
+              <h2 class="card-trip-pricing"><%= tour.price %>€</h2>
+            </div>
+            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+###################
+
+
+
+
+<p>
+  <% if user_signed_in? %>
+    <p> logged in as <%= current_user.first_name %></p>
+    <%= link_to "My Account", user_path(current_user) %>
+  <% else %>
+    <p>not logged in</p>
+  <% end %>
+</p>
+
+
+
+<%#= cl_image_tag "ubr33bsaqzjphdwv1ree", width: 400, height: 300, crop: :fill %>
+<%# <img src="/app/assets/images/tour_guide2.jpg" alt="test"> %>
+
+
+
+<%# <ul>
+  <%# @tours.each do |tour| %>
+    <%# <li>= tour.name</li>
+  <%# end %>
+<%# </ul> %>
 
 <%# <div class="container user-login"> %>
   <%#= link_to "log in", new_user_session_path %>
   <%#= link_to "sign up", new_user_registration_path %>
   <%#= link_to "log out", destroy_user_session_path, data: { turbo_method: :delete } %>
 <%# </div> %>
-
-
-
-<%# <p>
-  <%# <% if user_signed_in? %>
-    <%# logged in as <%= current_user.first_name %>
-    <%# <%= link_to "My Account", user_path(current_user) %>
-  <%# <% else %>
-    <%# not logged in %>
-  <%# <% end %>
-<%# </p> %>
 
 <%# <div class="row justify-content-center">
   <div class="col-12 col-lg-2">
@@ -57,6 +88,10 @@
 </div>
 
 <hr> %>
+
+<%#
+  <h1>THESE ARE ALL THE USERS JUST FOR TESTING PURPOSES (we won't need them here)</h1>
+
 
 <div class="row mt-5">
   <% @tours.each do |tour| %>
@@ -79,10 +114,3 @@
       </div>
     <% end %>
   </div>
-
-  <%# <h1>THESE ARE ALL THE USERS JUST FOR TESTING PURPOSES (we won't need them here)</h1>
-  <% @users.each do |user| %>
-    <%# <ul> %>
-      <%# <%= link_to user.first_name, user_path(user) %>
-    <%# </ul> %>
-  <%# <% end %>

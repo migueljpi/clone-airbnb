@@ -1,6 +1,6 @@
 <% if current_user.id == @user.id %>
   <% @bookings.each do |booking| %>
-    <% if booking.tour.user_id == @user.id && booking.date >= Date.today %>
+    <% if booking.tour.user_id == @user.id && booking.date < Date.today %>
       <div class="col-md-4 d-flex justify-content-center align-items-center">
         <div class="">
           <div class="card-trip-guide-show m-3" style="border-radius: 15px">

@@ -26,19 +26,21 @@
                   <p><%= booking.pax %> person</p>
                 <% end %>
               </div>
-              <% if booking.status == "Pending" %>
-                <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color: #D5EEFF; border-radius: 15px">
-                  <p><%= booking.status %></p>
-                </div>
-              <% elsif booking.status == "Accepted" %>
-                <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(117, 255, 122); border-radius: 15px">
-                  <p><%= booking.status %></p>
-                </div>
-              <% elsif booking.status == "Denied" %>
-                <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(255, 117, 117); border-radius: 15px">
-                  <p><%= booking.status %></p>
-                </div>
-              <% end %>
+              <div>
+                <% if booking.status == "Pending" %>
+                  <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color: #D5EEFF; border-radius: 15px">
+                    <p><%= booking.status %></p>
+                  </div>
+                <% elsif booking.status == "Confirmed" %>
+                  <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(117, 255, 122); border-radius: 15px">
+                    <p><%= booking.status %></p>
+                  </div>
+                <% elsif booking.status == "Denied" %>
+                  <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(255, 117, 117); border-radius: 15px">
+                    <p><%= booking.status %></p>
+                  </div>
+                <% end %>
+              </div>
             </div>
             <%= link_to "Cancel my tour", booking_destroy_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
           </div>

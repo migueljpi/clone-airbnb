@@ -2,6 +2,7 @@
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  height: 300px;
 }
 
 .card-trip > img {
@@ -23,7 +24,7 @@
 }
 
 
-.card-trip .card-trip-infos {
+.card-trip {
   padding: 16px;
   display: flex;
   justify-content: space-between;
@@ -34,9 +35,20 @@
 .card-trip-infos .card-trip-user {
   position: absolute;
   right: 16px;
-  top: -20px;
+  top: 20px;
   width: 40px;
 }
+
+.card-trip-description {
+  display:flex;
+  justify-content: space-between ;
+}
+
+
+
+
+
+
 
 .card-product {
   overflow: hidden;

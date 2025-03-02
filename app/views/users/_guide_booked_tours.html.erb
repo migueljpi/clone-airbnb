@@ -1,11 +1,45 @@
-
-<% @bookings.each do |booking| %>
-  <p>---------------------------------------------</p>
-  <p>Name of the tour: <%= booking.tour.name %></p>
-  <p>Date: <%= booking.date %></p>
-  <p>Client: <%= booking.user.first_name %></p>
-  <p>N of People: <%= booking.pax %></p>
-  <p>Status: <%= booking.status %></p>
-  <%= link_to "Confirm", accept_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
-  <%= link_to "Deny", reject_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
+<% if current_user.id == @user.id %>
+  <% @bookings.each do |booking| %>
+    <% if booking.tour.user_id == @user.id %>
+      <div class="col-3">
+        <div class="card-trip-user-show m-3" style="border-radius: 15px">
+          <div class="">
+            <% if booking.tour.photo %>
+              <%= cl_image_tag booking.tour.photo.key, width: 175, height: 100, crop: :fill %>
+            <% else %>
+              <%= image_tag("https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", width: 175, height: 90, style: "object-fit: cover")  %>
+            <% end %>
+          </div>
+          <div class="card-trip-infos-user-show p-3">
+            <div class="">
+              <div class="card-trip-infos-name">
+                <p><%= link_to booking.tour.name, tour_path(booking.tour) %></p>
+              </div>
+            </div>
+            <div class="mt-1 mb-1">
+              <p><%= booking.date %></p>
+              <% if booking.pax > 1 %>
+                <p><%= booking.pax %> people</p>
+              <% else %>
+                <p><%= booking.pax %> person</p>
+              <% end %>
+            </div>
+            <% if booking.status == "Pending" %>
+              <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color: #D5EEFF; border-radius: 15px">
+                <p><%= booking.status %></p>
+              </div>
+            <% elsif booking.status == "Accepted" %>
+              <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(117, 255, 122); border-radius: 15px">
+                <p><%= booking.status %></p>
+              </div>
+            <% elsif booking.status == "Denied" %>
+              <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(255, 117, 117); border-radius: 15px">
+                <p><%= booking.status %></p>
+              </div>
+            <% end %>
+          </div>
+          <%= link_to "Cancel my tour", booking_destroy_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
+        </div>
+    <% end %>
+  <% end %>
 <% end %>

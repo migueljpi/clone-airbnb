@@ -1,95 +1,78 @@
 <%# dark blue: #1B435D  %>
 <%# medium blue: #78BBE6 %>
 <%# light blue: #D5EEFF %>
-
 <div class="row">
+  <%# PERSONAL INFO (Left Side - Sticks to top when scrolling) %>
   <div class="col-4 p-4" id="profile">
-    <div class="p-4 d-flex flex-column align-items-center" style="background-color: #78BBE6; border-radius: 15px">
-      <div class="mb-4">
-        <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :thumb, :radius => 150 %>
+    <div class="sticky-top">
+      <div class="p-4 d-flex flex-column align-items-center" style="background-color: #78BBE6; border-radius: 15px">
+        <div class="mb-4">
+          <% if @user.photo.any? %>
+            <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :thumb, :radius => 150 %>
+          <% else %>
+            <%= image_tag "https://plus.unsplash.com/premium_photo-1661764174171-c29f85bd8a37?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", height: 300, width: 300, style: "border-radius: 150px; object-fit: cover" %>
+          <% end %>
+        </div>
+
+        <div class="d-flex flex-column align-items-center mb-4">
+          <h2><%= @user.first_name %> <%= @user.last_name %></h2>
+          <% if @user.guide %>
+            <h3>Tour Guide</h3>
+          <% end %>
+        </div>
+        <div class="" id="profile-info">
+          <p>Email: <%= @user.email %></p>
+          <p>Speaks: <%= @user.language %></p>
+          <p>About me: <%= @user.about_me %></p>
+        </div>
       </div>
-
-
-      <div class="d-flex flex-column align-items-center mb-4">
-        <h2>
-          <%= @user.first_name %> <%= @user.last_name %>
-        </h2>
-        <% if @user.guide %>
-          <h3>Tour Guide</h3>
+      <%# BUTTONS GO HERE %>
+      <div class="p-4 d-flex align-items-center sticky-top justify-content-center" id="buttons">
+        <% if current_user.id == @user.id %>
+          <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-primary mb-2 me-2", style: "border-radius: 15px" %>
+          <%= link_to "Delete Profile", user_registration_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger mb-2 me-2", style: "border-radius: 15px" %>
         <% end %>
       </div>
-      <p>Speaks: <%= @user.language %></p>
+    </div> <%# END of Sticky Profile Box %>
+  </div> <%# END of Profile Column col-4 %>
 
-      <p>About me: <%= @user.about_me %></p>
-    </div>
-  </div>
+  <%# BOOKINGS SECTION (Right Side) %>
+  <div class="col-8 p-4 d-flex flex-column gap-4" id="bookings">
+    <div class="row">
+      <div class="col-12">
 
-  <div class="col-8 p-4" id="bookings">
-    <div class="p-4 d-flex flex-column align-items-center" style="background-color: #D5EEFF; border-radius: 15px">
-      <h2>My Tours</h2>
-      <%= render "tourist_bought_bookings" %>
-    </div>
-  </div>
-</div>
-  <%# ONLY FOR THE GUIDE %>
-<div class="row">
-  <% if @user.guide && current_user.id == @user.id %>
-    <div class="col-12 p-4 mb-2" id="management" style="background-color: #1B435D; border-radius: 15px">
-      <h2>Booking management</h2>
-      <%= @user.bookings.each do |booking| %>
-        <div class="card-product">
-          <img src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png" />
-          <div class="card-product-infos">
-            <h2><%= booking.tour.name %></h2>
-            <p><%= booking.date %></p>
-            <p><%= booking.pax %></p>
-            <p>Status: <%= booking.status %></p>
-            <%= link_to "Confirm", accept_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
-            <%= link_to "Deny", reject_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
+        <%# UPCOMING TOURS (Inside col-8) %>
+        <div class="p-4" style="background-color: #D5EEFF; border-radius: 15px">
+          <div class="d-flex flex-column align-items-center mb-4">
+            <h2>Upcoming Tours</h2>
+          </div>
+          <div class="row d-flex flex-wrap justify-content-center">
+            <%= render "tourist_bought_bookings" %>
+          </div>
+        <%# there's a div missing, but it is the only way that i works %>
 
+        <%# PAST TOURS (Inside col-8) %>
+        <div class="p-4 mt-4" style="background-color: #D5EEFF; border-radius: 15px">
+          <div class="d-flex flex-column align-items-center mb-4">
+            <h2>Past Tours</h2>
+          </div>
+          <div class="row d-flex flex-wrap justify-content-center">
+            <%= render "tourist_past_bookings" %>
           </div>
         </div>
-      <% end %>
+      </div>
+    </div>
+  </div>
+</div> <%# END of First Row %>
 
-
-
-      <div class="p-4 d-flex flex-column align-items-center">
+<%# ONLY FOR THE GUIDE (Separate Full-Width Section) %>
+<% if @user.guide %>
+  <div class="row">
+    <div class="col-12 p-4 mb-2" id="management" style="background-color: #1B435D; border-radius: 15px">
+      <h2>Booking Management</h2>
+      <div class="p-4 d-flex flex-wrap justify-content-center">
         <%= render "guide_booked_tours" %>
       </div>
     </div>
-  <% end %>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
-<%= @user.first_name %>
-<p>are they a guide?<%= @user.guide %></p>
-<p>what language do they speak?<%= @user.language %></p>
-
-<%= link_to "Edit", edit_user_registration_path(@user) %>
-<%= link_to "Index", root_path %>
-<%# BASIC LOGIC TO DISPLAY ONLY THE TOURS OF THE ACTIVE USER %>
-<% if current_user.id == @user.id %>
-  <% @user.bookings.each do |booking| %>
-    <p><%= booking.tour.name %></p>
-    <p><%= booking.date %></p>
-    <p><%= booking.pax %></p>
-  <% end %>
-<% else %>
-  <p>you are not authorized to view this user's bookings</p>
+  </div> <%# END of Guide Booking Management %>
 <% end %>

@@ -1,8 +1,7 @@
-
 <% if current_user.id == @user.id %>
   <% if @user.bookings.any? %>
     <% @user.bookings.each do |booking| %>
-      <% if booking.date >= Date.today %>
+      <% if booking.date < Date.today %>
         <div class="col-3">
           <div class="card-trip-user-show m-3" style="border-radius: 15px">
             <div class="">
@@ -38,9 +37,13 @@
                 <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(255, 117, 117); border-radius: 15px">
                   <p><%= booking.status %></p>
                 </div>
+              <% elsif booking.status == "Completed" %>
+                <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color: #D5EEFF; border-radius: 15px">
+                  <p><%= booking.status %></p>
+                </div>
               <% end %>
             </div>
-            <%= link_to "Cancel my tour", booking_destroy_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
+            <%#= link_to "Cancel my tour", booking_destroy_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
           </div>
         </div>
       <% end %>

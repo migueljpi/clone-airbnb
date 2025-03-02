@@ -6,7 +6,11 @@
   <div class="col-4 p-4" id="profile">
     <div class="p-4 d-flex flex-column align-items-center" style="background-color: #78BBE6; border-radius: 15px">
       <div class="mb-4">
-        <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :thumb, :radius => 150 %>
+        <% if @user.photo.any? %>
+          <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :thumb, :radius => 150 %>
+        <% else %>
+          <%= image_tag "https://plus.unsplash.com/premium_photo-1661764174171-c29f85bd8a37?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", height: 300, width: 300, style: "border-radius: 150px; object-fit: cover" %>
+        <% end %>
       </div>
 
 
@@ -25,9 +29,13 @@
   </div>
 
   <div class="col-8 p-4" id="bookings">
-    <div class="p-4 d-flex flex-column align-items-center" style="background-color: #D5EEFF; border-radius: 15px">
-      <h2>My Tours</h2>
-      <%= render "tourist_bought_bookings" %>
+    <div class="p-4" style="background-color: #D5EEFF; border-radius: 15px">
+      <div class="d-flex flex-column align-items-center mb-4">
+        <h2>My Tours</h2>
+      </div>
+      <div class="row d-flex flex-wrap justify-content-center ">
+        <%= render "tourist_bought_bookings" %>
+      </div>
     </div>
   </div>
 </div>
@@ -80,6 +88,8 @@
 <%= @user.first_name %>
 <p>are they a guide?<%= @user.guide %></p>
 <p>what language do they speak?<%= @user.language %></p>
+<p>email: <%= @user.email %></p>
+<p>id: <%= @user.id %></p>
 
 <%= link_to "Edit", edit_user_registration_path(@user) %>
 <%= link_to "Index", root_path %>

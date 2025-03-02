@@ -118,3 +118,14 @@
   -webkit-box-orient: vertical;
   word-break: break-word;
 }
+
+.card-trip-guide-show {
+  width: 175px;
+  height: 325px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  background: #78BBE6;
+}

@@ -69,9 +69,21 @@
 <% if @user.guide %>
   <div class="row">
     <div class="col-12 p-4 mb-2" id="management" style="background-color: #1B435D; border-radius: 15px">
-      <h2>Booking Management</h2>
+      <div class="d-flex justify-content-center align-items-center text-center">
+        <h2>Booking Management</h2>
+      </div>
       <div class="p-4 d-flex flex-wrap justify-content-center">
         <%= render "guide_booked_tours" %>
+      </div>
+    </div>
+  </div> <%# END of Guide Booking Management %>
+  <div class="row">
+    <div class="col-12 p-4 mb-2" id="management" style="background-color: #1B435D; border-radius: 15px">
+      <div class="d-flex justify-content-center align-items-center text-center">
+        <h2>Past Bookings</h2>
+      </div>
+      <div class="p-4 d-flex flex-wrap justify-content-center">
+        <%= render "guide_past_tours" %>
       </div>
     </div>
   </div> <%# END of Guide Booking Management %>

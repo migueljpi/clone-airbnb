@@ -11,7 +11,6 @@ require 'json'
 require 'open-uri'
 require 'faker'
 
-
 puts "Cleaning database"
 Tour.destroy_all
 Booking.destroy_all

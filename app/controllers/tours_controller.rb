@@ -4,13 +4,15 @@ class ToursController < ApplicationController
     @user = current_user
     @users = User.all
 
-    if params[:search].present?
-      @tours = @tours.where("name LIKE ?", "%#{params[:search]}%")
-    end
+    return unless params[:search].present?
+
+    @tours = @tours.where("name LIKE ?", "%#{params[:search]}%")
   end
 
   def show
     @tour = Tour.find(params[:id])
+    @booking = Booking.new(date: Date.today)
+    @booking.user = current_user
   end
 
   private

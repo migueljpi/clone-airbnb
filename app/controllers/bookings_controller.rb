@@ -51,15 +51,63 @@ class BookingsController < ApplicationController
   end
 
   def cancel
+    @booking = Booking.find(params[:id])
+    if current_user == @booking.user
+      @booking.update(status: "Cancelled")
+      if @booking.save
+        flash[:notice] = "Booking has been cancelled."
+      else
+        flash[:notice] = "Failed to cancel booking."
+      end
+    else
+      flash[:notice] = "You are not authorized to cancel this booking."
+    end
+    redirect_to user_path(current_user)
   end
 
   def complete
+    @booking = Booking.find(params[:id])
+    if current_user == @booking.user
+      @booking.update(status: "Completed")
+      if @booking.save
+        flash[:notice] = "Booking has been completed."
+      else
+        flash[:notice] = "Failed to complete booking."
+      end
+    else
+      flash[:notice] = "You are not authorized to complete this booking."
+    end
+    redirect_to user_path(current_user)
   end
 
   def no_show
+    @booking = Booking.find(params[:id])
+    if current_user == @booking.tour.user
+      @booking.update(status: "No Show")
+      if @booking.save
+        flash[:notice] = "Booking has been marked as No Show."
+      else
+        flash[:notice] = "Failed to mark booking as No Show."
+      end
+    else
+      flash[:notice] = "You are not authorized to mark this booking as No Show."
+    end
+    redirect_to user_path(current_user)
   end
 
   def refund
+    @booking = Booking.find(params[:id])
+    if current_user == @booking.tour.user
+      @booking.update(status: "Refunded")
+      if @booking.save
+        flash[:notice] = "Booking has been refunded."
+      else
+        flash[:notice] = "Failed to refund booking."
+      end
+    else
+      flash[:notice] = "You are not authorized to refund this booking."
+    end
+    redirect_to user_path(current_user)
   end
 
   def edit

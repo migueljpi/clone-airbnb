@@ -9,10 +9,12 @@
 #   end
 require 'json'
 require 'open-uri'
+require 'faker'
 
 puts "Cleaning database"
 Tour.destroy_all
 Booking.destroy_all
+User.destroy_all
 # User.destroy_all
 
 # var Amadeus = require('test.api.amadeus.com/v1/shopping/activities');
@@ -24,13 +26,53 @@ Booking.destroy_all
 
 CATEGORIES = ["Walking Tour", "Van Tour", "Bus Tour", "Free Tour", "Boat Tour"]
 
-require 'faker'
+#CREATE USERS
+puts "Creating users"
+
+file = URI.parse("https://plus.unsplash.com/premium_photo-1661764174171-c29f85bd8a37?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D").open
+tourist1 = User.new(email: "tourist1@gmail.com", password: "123456", age: 25,
+guide: false, language: "English", first_name: "John", last_name: "Doe",
+about_me: Faker::TvShows::GameOfThrones.quote)
+tourist1.photo.attach(io: file, filename: "nes.png", content_type: "image/png")
+tourist1.save!
+
+file2 = URI.parse("https://plus.unsplash.com/premium_photo-1682096348418-dbef9b1d0add?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D").open
+tourist2 = User.new(email: "tourist2@gmail.com", password: "123456", age: 23,
+guide: false, language: "Portuguese", first_name: "Joana", last_name: "Santos",
+about_me: Faker::TvShows::GameOfThrones.quote)
+tourist2.photo.attach(io: file2, filename: "nes.png", content_type: "image/png")
+tourist2.save!
+
+file3 = URI.parse("https://images.unsplash.com/photo-1588390801685-1432b35a975b?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D").open
+guide1 = User.create(email: "guide1@gmail.com", password: "123456", age: 35,
+guide: true, language: "English", first_name: "Charles", last_name: "Dunne",
+about_me: Faker::TvShows::GameOfThrones.quote)
+guide1.photo.attach(io: file3, filename: "nes.png", content_type: "image/png")
+guide1.save!
+
+file4 = URI.parse("https://plus.unsplash.com/premium_photo-1716866637657-da951241f2db?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D").open
+guide2 = User.create(email: "guide2@gmail.com", password: "123456", age: 33,
+guide: true, language: "Portuguese", first_name: "Cláudia", last_name: "Dunas",
+about_me: Faker::TvShows::GameOfThrones.quote)
+guide2.photo.attach(io: file4, filename: "nes.png", content_type: "image/png")
+guide2.save!
+
+puts "created 4 users"
+
+
+#CREATE TOURS
+puts "Creating tours"
 16.times do |i|
-  tour = Tour.new(user: User.find(1), name: "Tour in #{Faker::Address.city} with #{Faker::Superhero.name}", location: Faker::Address.city, description: Faker::TvShows::GameOfThrones.quote, duration_in_hours: Faker::Number.within(range: 1..8), price: Faker::Number.within(range: 15..105), category: CATEGORIES.sample)
+  location = Faker::TvShows::GameOfThrones.city
+  guide_array = [guide1, guide2]
+  guide = guide_array.sample
+  tour = Tour.new(user: guide, name: "Tour in #{location} with #{guide.first_name}", location: location,
+  description: Faker::TvShows::GameOfThrones.quote, duration_in_hours: Faker::Number.within(range: 1..8),
+  price: Faker::Number.within(range: 15..105), category: CATEGORIES.sample)
   photoUrl = "https://cdn.getyourguide.com/img/tour/02804a4e26cd4eaf7102b59fbeffc4fd14f80b48eb0af36e2dddeeb5b5ead364.jpg/98.jpg"
   tour.photo.attach(io: URI.open(photoUrl), filename: 'atenasAcropolis.png', content_type: 'image/png')
   tour.save!
-  puts "created #{i} tours"
+  puts "created #{i+1} tours"
 end
 puts "All done!"
 

@@ -20,10 +20,10 @@ Rails.application.routes.draw do
       member do
         patch :accept
         patch :reject
-        # patch :cancel
-        # patch :complete
-        # patch :no_show
-        # patch :refund
+        patch :cancel
+        patch :complete
+        patch :no_show
+        patch :refund
       end
     end
   end

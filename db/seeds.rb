@@ -11,18 +11,21 @@ require 'json'
 require 'open-uri'
 require 'faker'
 
+
 puts "Cleaning database"
 Tour.destroy_all
 Booking.destroy_all
 User.destroy_all
-# User.destroy_all
 
-# var Amadeus = require('test.api.amadeus.com/v1/shopping/activities');
 
-# var amadeus = new Amadeus({
-#   clientId: '[API Key]',
-#   clientSecret: '[API Secret]'
-# });
+# # var Amadeus = require('test.api.amadeus.com/v1/shopping/activities');
+
+# # var amadeus = new Amadeus({
+# #   clientId: '[API Key]',
+# #   clientSecret: '[API Secret]'
+# # });
+
+User.create(email: "john@gmail.com", password: "123456", age: 30, guide: true, about_me: "Hi", language: "English", first_name: "John", last_name: "Doe")
 
 CATEGORIES = ["Walking Tour", "Van Tour", "Bus Tour", "Free Tour", "Boat Tour"]
 
@@ -76,10 +79,10 @@ puts "Creating tours"
 end
 puts "All done!"
 
-# validates :email, presence: true
-# validates :encrypted_password, presence: true
-# validates :age, presence: true, numericality: { only_integer: true }
-# validates :guide, inclusion: { in: [true,false]}
-# validates :language, presence: true
-# validates :first_name, presence: true
-# validates :last_name, presence: true
+# # validates :email, presence: true
+# # validates :encrypted_password, presence: true
+# # validates :age, presence: true, numericality: { only_integer: true }
+# # validates :guide, inclusion: { in: [true,false]}
+# # validates :language, presence: true
+# # validates :first_name, presence: true
+# # validates :last_name, presence: true

@@ -15,14 +15,15 @@
       </div>
     </div>
   </div>
-  <div class="mt-5" data-remove-target="removableElement">
-    <%= render "banner" %>
-  </div>
+  <% unless params[:search].present? %>
+    <div class="mt-5" data-remove-target="removableElement">
+      <%= render "banner" %>
+    </div>
+  <% end %>
 
 </div>
 
-
-
+<%#= raise %>
 
 
 
@@ -63,8 +64,7 @@
 
 
 
-<%#= cl_image_tag "ubr33bsaqzjphdwv1ree", width: 400, height: 300, crop: :fill %>
-<%# <img src="/app/assets/images/tour_guide2.jpg" alt="test"> %>
+
 
 
 

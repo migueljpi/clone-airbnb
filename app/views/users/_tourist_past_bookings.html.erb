@@ -50,10 +50,9 @@
     <% end %>
   </div>
   <% else %>
-    <h1>You have no bookings yet!</h1>
-    <h3>Get ready to explore the world.</h3>
-    <%= link_to "Book a tour", root_path%>
+    <h2>You have no bookings yet!</h2>
+    <h3>Get ready to explore the world. <%= link_to "Book a tour", root_path, style: "text-decoration: none"%></h3>
   <% end %>
 <% else %>
-  <p>you are not authorized to view this user's bookings</p>
+  <p>You are not authorized to view this user's bookings</p>
 <% end %>

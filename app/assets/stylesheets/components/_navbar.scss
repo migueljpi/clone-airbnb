@@ -24,3 +24,14 @@
 .nav-item {
   display: flex
 }
+.nav-avatar-circle {
+  font-size: 28px;
+  color: lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+}

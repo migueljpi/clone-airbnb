@@ -7,8 +7,8 @@
     <div class="sticky-top">
       <div class="p-4 d-flex flex-column align-items-center" style="background-color: #78BBE6; border-radius: 15px">
         <div class="mb-4">
-          <% if @user.photo %>
-            <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :thumb, class: "avatar-user-show" %>
+          <% if @user.photo.key? %>
+            <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :thumb, :radius => 150 %>
           <% else %>
             <%= image_tag "https://plus.unsplash.com/premium_photo-1661764174171-c29f85bd8a37?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", height: 300, width: 300, style: "object-fit: cover", class: "avatar-user-show" %>
           <% end %>

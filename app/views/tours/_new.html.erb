@@ -1,0 +1,43 @@
+<div class="container">
+  <h2>Sign up</h2>
+
+  <%= simple_form_for (@tour) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :name,
+                  required: true,
+                  input_html: { autocomplete: "name" } %>
+      <%= f.input :location,
+                  required: true,
+                  input_html: { autocomplete: "location" } %>
+      <%= f.input :description,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "description" }%>
+      <%= f.input :duration_in_hours,
+                  required: true,
+                  input_html: { autocomplete: "duration_in_hours" } %>
+      <%= f.input :starting_point,
+                  input_html: { autocomplete: "starting_point" } %>
+      <%= f.input :ending_point,
+                  input_html: { autocomplete: "ending_point" } %>
+      <%= f.input :sites,
+                  input_html: { autocomplete: "sites" } %>
+      <%= f.input :price, checked_value: :true, unchecked_value: :false,
+                  required: true,
+                  input_html: { autocomplete: "price" } %>
+      <%= f.input :category, collection: Tour::CATEGORIES,
+                  required: true,
+                  input_html: { autocomplete: "category" } %>
+      <%= f.input :starting_time,
+                  required: true,
+                  input_html: { autocomplete: "starting_time" } %>
+      <%= f.input :photo, as: :file %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Create" %>
+    </div>
+  <% end %>
+</div>

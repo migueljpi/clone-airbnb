@@ -12,9 +12,9 @@
                   <%= image_tag("https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", width: 175, height: 90, style: "object-fit: cover")  %>
                 <% end %>
               </div>
-              <div class="card-trip-infos-user-show p-3">
+              <div class="tourist-bought-bookings-info-user-show p-3">
                 <div class="">
-                  <div class="card-trip-infos-name">
+                  <div class="tourist-bought-bookings-infos-name">
                     <p><%= link_to booking.tour.name, tour_path(booking.tour) %></p>
                   </div>
                 </div>
@@ -27,7 +27,7 @@
                   <% end %>
                 </div>
               </div>
-              <div class="card-trip-infos-user-show">
+              <div class="tourist-bought-bookings-info-user-show">
                 <% if booking.status == "Pending" %>
                   <div class="d-flex justify-content-center ">
                     <%= link_to "Confirm", accept_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch }, class: "btn btn-primary", style: "border-radius: 15px" %>

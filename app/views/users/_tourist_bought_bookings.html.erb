@@ -4,7 +4,7 @@
     <% @user.bookings.each do |booking| %>
       <% if booking.date >= Date.today %>
         <div class="col-3">
-          <div class="card-trip-user-show m-3" style="border-radius: 15px">
+          <div class="tourist-bought-bookings-user-show m-3" style="border-radius: 15px">
             <div class="">
               <% if booking.tour.photo %>
                 <%= cl_image_tag booking.tour.photo.key, width: 175, height: 100, crop: :fill %>
@@ -12,9 +12,9 @@
                 <%= image_tag("https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", width: 175, height: 90, style: "object-fit: cover")  %>
               <% end %>
             </div>
-            <div class="card-trip-infos-user-show p-3">
+            <div class="tourist-bought-bookings-info-user-show p-3">
               <div class="">
-                <div class="card-trip-infos-name">
+                <div class="tourist-bought-bookings-infos-name">
                   <p><%= link_to booking.tour.name, tour_path(booking.tour) %></p>
                 </div>
               </div>

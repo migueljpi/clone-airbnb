@@ -2,11 +2,24 @@
   color: white;
   padding: 8px 24px;
   border-radius: 4px;
-  background: #670BFF;
+  background: $primary;
   transition: background 0.3s ease;
 }
 
 .btn-flat:hover {
-  background: #4D04C4;
+  background: $medium-dark-blue;
+  color: white;
+}
+
+.btn-delete {
+  color: white;
+  padding: 8px 24px;
+  border-radius: 4px;
+  background: $danger;
+  transition: background 0.3s ease;
+}
+
+.btn-delete:hover {
+  background: rgb(227, 14, 14);
   color: white;
 }

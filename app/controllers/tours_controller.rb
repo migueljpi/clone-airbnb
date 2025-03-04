@@ -16,6 +16,20 @@ class ToursController < ApplicationController
     @booking.user = current_user
   end
 
+  def new
+    @tour = Tour.new
+  end
+
+  def create
+    @tour = Tour.new(tour_params)
+    @tour.user = current_user
+    if @tour.save
+      redirect_to tour_path(@tour)
+    else
+      render :new, unprocessable_entity
+    end
+  end
+
   private
 
   def tour_params

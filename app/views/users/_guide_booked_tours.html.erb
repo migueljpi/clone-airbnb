@@ -4,7 +4,7 @@
       <% if booking.tour.user_id == @user.id && booking.date >= Date.today %>
         <div class="col-md-4 d-flex justify-content-center align-items-center">
           <div class="">
-            <div class="card-trip-guide-show m-3" style="border-radius: 15px">
+            <div class="tourist-bought-bookings-user-show m-3" style="border-radius: 15px">
               <div class="">
                 <% if booking.tour.photo %>
                   <%= cl_image_tag booking.tour.photo.key, width: 175, height: 100, crop: :fill %>
@@ -30,8 +30,8 @@
               <div class="tourist-bought-bookings-info-user-show">
                 <% if booking.status == "Pending" %>
                   <div class="d-flex justify-content-center ">
-                    <%= link_to "Confirm", accept_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch }, class: "btn btn-primary", style: "border-radius: 15px" %>
-                    <%= link_to "Deny", reject_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch }, class: "btn btn-danger", style: "border-radius: 15px" %>
+                    <%= link_to "Confirm", accept_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch }, class: "btn btn-flat" %>
+                    <%= link_to "Deny", reject_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch }, class: "btn btn-warning" %>
                   </div>
                 <% else %>
                   <div class="p-2 d-flex justify-content-center align-items-center text-center" style="background-color: #D5EEFF; border-radius: 15px">

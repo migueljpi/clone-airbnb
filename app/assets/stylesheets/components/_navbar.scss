@@ -5,6 +5,9 @@
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navbar-lewagon .navbar-brand img {
@@ -13,16 +16,41 @@
 
 .nav-link {
   color: $dark-blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  height: 40px;
+  &:hover {
+    background-color: lightgray;
+    color: darken($dark-blue, 10%);
+    border-radius: 0.5rem
+  }
 }
 
 #brand-name {
   font-size: 24px;
-  .hover {
+  color: $dark-blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  padding: auto;
+  &:hover {
+    color: darken($dark-blue, 10%);
   }
 }
 
 .nav-item {
-  display: flex
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2px 1em
 }
 .nav-avatar-circle {
   font-size: 28px;

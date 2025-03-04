@@ -71,7 +71,7 @@ puts "Creating tours"
   tour = Tour.new(user: guide, name: "Tour in #{location} with #{guide.first_name}", location: location,
   description: Faker::TvShows::GameOfThrones.quote, duration_in_hours: Faker::Number.within(range: 1..8),
   price: Faker::Number.within(range: 15..105), category: CATEGORIES.sample)
-  photoUrl = "https://cdn.getyourguide.com/img/tour/02804a4e26cd4eaf7102b59fbeffc4fd14f80b48eb0af36e2dddeeb5b5ead364.jpg/98.jpg"
+  photoUrl = "https://images.unsplash.com/photo-1569949381669-ecf31ae8e613?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
   tour.photo.attach(io: URI.open(photoUrl), filename: 'atenasAcropolis.png', content_type: 'image/png')
   tour.save!
   puts "created #{i+1} tours"

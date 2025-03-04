@@ -11,8 +11,8 @@
     <div class="two-columns pb-4">
       <div class="tour-img">
         <%# <%= render @tour %>
-          <%# <%= cl_image_tag tours.photo.key %>
-        <%= image_tag "tour1.jpg", alt: "Paris Tour", width: 500 %>
+        <%= cl_image_tag(@tour.photo.key) %>
+        <%# <%= image_tag "tour1.jpg", alt: "Paris Tour", width: 500 %>
       </div>
 
       <div id="tour-show-booking-form">
@@ -20,9 +20,9 @@
         <% if user_signed_in? %>
 
           <%= simple_form_for [@tour, @booking], url: tour_bookings_path(@tour) do |f| %>
-            <%= f.input :date, as: :date, html5: true %>
+            <%= f.input :date, as: :string, input_html: { data: { controller: "datepicker" } } %>
             <%= f.input :pax, input_html: { type: 'number', step: 1 } %>
-            <%= f.submit "BOOK THIS TOUR!!!", class: "btn btn-flat"%>
+            <%= f.submit "BOOK THIS TOUR!!!", class: "btn btn-warning"%>
           <% end %>
           <%# <p><%= link_to "BOOK THIS TOUR!!!", new_tour_booking_path(@tour), class: "btn btn-primary" %>
           <%# </p>  %>

@@ -4,7 +4,7 @@
       <% if booking.tour.user_id == @user.id && booking.date < Date.today %>
         <div class="col-md-4 d-flex justify-content-center align-items-center">
           <div class="">
-            <div class="card-trip-guide-show m-3" style="border-radius: 15px">
+            <div class="tourist-bought-bookings-user-show m-3" style="border-radius: 15px">
               <div class="">
                 <% if booking.tour.photo %>
                   <%= cl_image_tag booking.tour.photo.key, width: 175, height: 100, crop: :fill %>

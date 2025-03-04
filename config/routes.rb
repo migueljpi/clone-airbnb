@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   # Defines the routes for the posts resource
-  resources :tours, only: [:index, :show] do
+  resources :tours, only: [:index, :show, :new, :create] do
     resources :bookings, only: [:new, :create, :show] do
       member do
         patch :accept

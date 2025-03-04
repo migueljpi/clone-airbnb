@@ -14,6 +14,10 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%# Flatpickr calendar stylesheets %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_orange.css">
+
     <%= javascript_importmap_tags %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
   </head>
@@ -26,9 +30,10 @@
     <%= yield %>
 
 
-    <%= render "shared/footer" %>
-
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+
+    <%= render "shared/footer" %>
+
   </body>
 </html>

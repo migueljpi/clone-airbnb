@@ -11,6 +11,7 @@ class ToursController < ApplicationController
 
   def show
     @tour = Tour.find(params[:id])
+    @user = current_user
     @booking = Booking.new(date: Date.today)
     @booking.user = current_user
   end

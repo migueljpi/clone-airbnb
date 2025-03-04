@@ -2,27 +2,27 @@
 
   <div class="row">
 
-    <header class="header">
+    <header class="header pt-3">
       <%= link_to "Back to Tours", root_path %>
     </header>
 
-    <h1 class="p-5"><%= @tour.name %></h1>
+    <h1 class="py-4"><%= @tour.name %></h1>
 
-    <div class="two-columns">
+    <div class="two-columns pb-4">
       <div class="tour-img">
         <%# <%= render @tour %>
-          <%# <%= cl_image_tag tours.photo.key %>
-        <%= image_tag "tour1.jpg", alt: "Paris Tour", width: 500 %>
+        <%= cl_image_tag(@tour.photo.key) %>
+        <%# <%= image_tag "tour1.jpg", alt: "Paris Tour", width: 500 %>
       </div>
 
-      <div>
+      <div id="tour-show-booking-form">
         <%# <% if user_signed_in? && !@user.guide %>
         <% if user_signed_in? %>
 
           <%= simple_form_for [@tour, @booking], url: tour_bookings_path(@tour) do |f| %>
-            <%= f.input :date, as: :date, html5: true %>
+            <%= f.input :date, as: :string, input_html: { data: { controller: "datepicker" } } %>
             <%= f.input :pax, input_html: { type: 'number', step: 1 } %>
-            <%= f.submit "BOOK THIS TOUR!!!", class: "btn btn-primary"%>
+            <%= f.submit "BOOK THIS TOUR!!!", class: "btn btn-warning"%>
           <% end %>
           <%# <p><%= link_to "BOOK THIS TOUR!!!", new_tour_booking_path(@tour), class: "btn btn-primary" %>
           <%# </p>  %>
@@ -42,11 +42,13 @@
   </div>
 
   <div class="row">
-
-    <p>by: <%= link_to "Tour Guide: #{@tour.user.first_name} #{@tour.user.last_name}", user_path(@tour.user) %></p>
-    <p><%= @tour.description %></p>
-    <p><%= @tour.price %> €</p>
-    <p><%= @tour.location %></p>
+    <div class="tour-description">
+      <h4 class="py-2">Tour Description</h4>
+      <p><%= @tour.description %></p>
+      <p><strong>Price of Tour: </strong><%= @tour.price %> €</p>
+      <p><strong>Location: </strong><%= @tour.location %></p>
+      <p><strong>Tour Guide: </strong><%= link_to "#{@tour.user.first_name} #{@tour.user.last_name}", user_path(@tour.user) %></p>
+    </div>
 
   </div>
 

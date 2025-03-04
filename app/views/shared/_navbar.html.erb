@@ -1,6 +1,6 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon sticky-top mb-1">
   <div class="container-fluid mx-5">
-    <%= link_to "How I met Your Tour Guide", root_path, class: "nav-link p-2", id: "brand-name" %>
+    <%= link_to "How I Met Your Tour Guide", root_path, id: "brand-name" %>
     <%# # if we want a logo %>
     <%# <%= link_to "#", class: "navbar-brand" do %>
       <%# <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
@@ -11,15 +11,22 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav mx-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Tours", root_path, class: "nav-link pe-5" %>
+            <%= link_to "Tours", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "My Bookings", user_path(current_user), class: "nav-link pe-5" %>
+            <%= link_to "My Bookings", user_path(current_user), class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
+          <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <% if @user.photo.attached? %>
+              <%= image_tag @user.photo, class: "avatar nav-avatar-circle", alt: "dropdown menu"%>
+            <% else %>
+              <i class="fa-solid fa-user nav-avatar-circle"></i>
+            <% end %>
+          </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
               <%# <%= link_to "Another action", "#", class: "dropdown-item" %>

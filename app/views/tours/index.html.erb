@@ -1,18 +1,15 @@
-<div data-controller="remove" class="container">
+<div data-controller="remove">
 
-  <h2 style="color: #1B435D;">FIND YOUR NEXT TOUR</h2>
+
+  <h2 id="search-bar-header" style="color: #1B435D;">FIND YOUR NEXT TOUR</h2>
   <div class="col-12 col-lg-2">
-    <div class="search-filter">
-      <div class="search-filter-items">
-        <div class="search-tours">
-          <%= form_with(url: root_path, method: :get, local: true) do %>
-            <%= label_tag :search, "Search by location" %>
-            <%= text_field_tag :search, params[:search], placeholder: "Search by location" %>
-            <%#= submit_tag "Search" %>
-            <button data-action="click->remove#fire">Search</button>
-          <% end %>
-        </div>
-      </div>
+    <div class="search-filter-items">
+      <%= form_with(url: root_path, method: :get, local: true) do %>
+        <%= label_tag :search, "Search tours" %>
+        <%= text_field_tag :search, params[:search], placeholder: "Type in a location" %>
+        <%#= submit_tag "Search" %>
+        <button data-action="click->remove#fire" class="btn btn-warning">Search</button>
+      <% end %>
     </div>
   </div>
   <% unless params[:search].present? %>
@@ -20,18 +17,15 @@
       <%= render "banner" %>
     </div>
   <% end %>
-
-</div>
-
-<%#= raise %>
+  </div>
 
 
-
+<div class="container">
   <div class="row mt-5">
     <% @tours.each do |tour| %>
       <div class="col-4">
         <div class="card-trip m-3">
-          <%= image_tag(tour.photo) %>
+          <%= cl_image_tag(tour.photo.key) %>
           <div class="card-trip-infos">
             <div class="card-trip-description">
               <div>
@@ -46,9 +40,7 @@
       </div>
     <% end %>
   </div>
-
-
-###################
+</div>
 
 
 
@@ -61,56 +53,3 @@
     <p>not logged in</p>
   <% end %>
 </p>
-
-
-
-
-
-
-
-<%# <ul>
-  <%# @tours.each do |tour| %>
-    <%# <li>= tour.name</li>
-  <%# end %>
-<%# </ul> %>
-
-<%# <div class="container user-login"> %>
-  <%#= link_to "log in", new_user_session_path %>
-  <%#= link_to "sign up", new_user_registration_path %>
-  <%#= link_to "log out", destroy_user_session_path, data: { turbo_method: :delete } %>
-<%# </div> %>
-
-<%# <div class="row justify-content-center">
-  <div class="col-12 col-lg-2"> >
-    <!-- This div is centered and takes 6 columns -->
-    <h2 style="color: #1B435D;">search bar</h2>
-  </div>
-</div>
-
-<hr> %>
-
-<%#
-  <h1>THESE ARE ALL THE USERS JUST FOR TESTING PURPOSES (we won't need them here)</h1> %>
-
-
-<div class="row mt-5">
-  <% @tours.each do |tour| %>
-      <div class="col-3">
-        <div class="card-trip m-3">
-          <% if tour.photo %>
-            <%= cl_image_tag(tour.photo.key)  %>
-          <% else %>
-            <%= image_tag("https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") %>
-          <% end %>
-          <div class="card-trip-infos">
-            <div>
-              <p><%= link_to tour.name, tour_path(tour) %></p>
-              <p><%= tour.description %></p>
-            </div>
-            <h2 class="card-trip-pricing"><%= tour.price %>€</h2>
-            <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>

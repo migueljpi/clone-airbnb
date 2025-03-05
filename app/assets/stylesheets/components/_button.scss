@@ -1,30 +1,59 @@
-.btn-flat {
-  color: white;
+.btn {
+  // color: white;
   padding: 8px 24px;
   border-radius: 4px;
-  // background: $primary;
-  background: $warning;
   transition: background 0.3s ease;
-}
 
-.btn-flat:hover {
-  background: $medium-dark-blue;
-  color: white;
-}
+  &:hover {
+    // color: white;
+  }
 
-.btn-delete {
-  color: white;
-  padding: 8px 24px;
-  border-radius: 4px;
-  background: $danger;
-  transition: background 0.3s ease;
-}
+  &.btn-flat {
+    background: $warning;
+    color: white;
 
-.btn-delete:hover {
-  background: rgb(227, 14, 14);
-  color: white;
-}
+    &:hover {
+      background: #fb6e3b;
+      color: white;
+    }
+  }
 
+  &.btn-delete {
+    background: $danger;
+    color: white;
+
+    &:hover {
+      background: rgb(227, 14, 14);
+      color: white;
+    }
+  }
+
+  &.btn-back {
+    background: $primary;
+    color: white;
+
+
+    &:hover {
+      background: #0c334d;
+      color: white;
+    }
+  }
+
+  &.btn-login-signup {
+    color: white;
+    background: $warning;
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    margin: 0 auto;
+
+    &:hover {
+      background: #fb6e3b;
+      color: white;
+    }
+  }
+
+}
 
 .btn-ghost {
   color: #4A4A4A;

@@ -5,6 +5,7 @@
         <div class="col-3">
           <div class="tourist-bought-bookings-user-show m-3" style="border-radius: 15px">
             <div class="">
+              <% booking.status = "Completed" %>
               <% if booking.tour.photo %>
                 <%= cl_image_tag booking.tour.photo.key, width: 175, height: 100, crop: :fill %>
               <% else %>

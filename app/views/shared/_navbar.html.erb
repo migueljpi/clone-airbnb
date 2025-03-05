@@ -13,16 +13,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mx-auto">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Tours", root_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "My Bookings", user_path(current_user), class: "nav-link" %>
-          </li>
           <li class="nav-item dropdown">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <% if @user.photo.attached? %>
-              <%= cl_image_tag @user.photo.key, class: "avatar nav-avatar-circle", alt: "dropdown menu"%>
+            <% if current_user.photo.attached? %>
+              <%= cl_image_tag current_user.photo.key, class: "avatar nav-avatar-circle", alt: "dropdown menu"%>
             <% else %>
               <i class="fa-solid fa-user nav-avatar-circle"></i>
             <% end %>

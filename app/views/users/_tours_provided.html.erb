@@ -1,7 +1,7 @@
 <% @tours.each do |tour| %>
   <div class="col-md-4 d-flex justify-content-center align-items-center">
     <div class="">
-      <div class="card-trip-guide-show m-3" style="border-radius: 15px">
+      <div class="tourist-bought-bookings-info-user-show m-3" style="border-radius: 15px">
         <div class="">
           <% if tour.photo %>
             <%= cl_image_tag tour.photo.key, width: 175, height: 100, crop: :fill %>
@@ -16,7 +16,6 @@
             </div>
           </div>
           <div class="mt-1 mb-1">
-            <p>SUP</p>
           </div>
         </div>
       </div>

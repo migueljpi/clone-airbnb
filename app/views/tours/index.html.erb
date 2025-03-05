@@ -41,15 +41,3 @@
     <% end %>
   </div>
 </div>
-
-
-
-
-<p>
-  <% if user_signed_in? %>
-    <p> logged in as <%= current_user.first_name %></p>
-    <%= link_to "My Account", user_path(current_user) %>
-  <% else %>
-    <p>not logged in</p>
-  <% end %>
-</p>

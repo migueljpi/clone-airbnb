@@ -14,7 +14,8 @@ class BookingsController < ApplicationController
     @booking.tour = @tour
     @booking.user = current_user
     if @booking.save
-      redirect_to user_path(current_user), notice: "Booking was successfully created."
+      redirect_to user_path(current_user)
+      flash[:notice] = "Booking was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,10 +28,10 @@ class BookingsController < ApplicationController
       if @booking.save
         flash[:notice] = "Booking has been confirmed."
       else
-        flash[:alert] = "Failed to confirm booking."
+        flash[:notice] = "Failed to confirm booking."
       end
     else
-      flash[:alert] = "You are not authorized to accept this booking."
+      flash[:notice] = "You are not authorized to accept this booking."
     end
     redirect_to user_path(current_user)
   end

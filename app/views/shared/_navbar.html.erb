@@ -6,6 +6,16 @@
       <%# <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
     <%# <% end %>
 
+  <div class="search-filter-items">
+    <%= form_with(url: root_path, method: :get, local: true) do %>
+      <%#= label_tag :search, "Search tours" %>
+      <div class="d-flex">
+        <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Find a tour" %>
+        <button data-action="click->remove#fire" class="btn btn-warning">Search</button>
+        </div>
+    <% end %>
+  </div>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>

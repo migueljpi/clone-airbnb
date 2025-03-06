@@ -6,7 +6,8 @@ class ToursController < ApplicationController
 
     return unless params[:search].present?
 
-    @tours = @tours.where("name LIKE ?", "%#{params[:search]}%")
+    # @tours = @tours.where("name LIKE ?", "%#{params[:search]}%")
+    @tours = Tour.search_by_name_and_location_and_description_and_starting_point_and_ending_point_and_sites_and_category(params[:search])
   end
 
   def show

@@ -1,17 +1,17 @@
 <div data-controller="remove">
 
 
-  <h2 id="search-bar-header" style="color: #1B435D;">FIND YOUR NEXT TOUR</h2>
-  <div class="col-12 col-lg-2">
-    <div class="search-filter-items">
-      <%= form_with(url: root_path, method: :get, local: true) do %>
-        <%= label_tag :search, "Search tours" %>
-        <%= text_field_tag :search, params[:search], placeholder: "Type in a location" %>
-        <%#= submit_tag "Search" %>
-        <button data-action="click->remove#fire" class="btn btn-warning">Search</button>
-      <% end %>
-    </div>
-  </div>
+  <%# <h2 id="search-bar-header" style="color: #1B435D;">FIND YOUR NEXT TOUR</h2> %>
+  <%# <div class="col-12 col-lg-2"> %>
+    <%# <div class="search-filter-items"> %>
+      <%#= form_with(url: root_path, method: :get, local: true) do %>
+        <%# <div class="d-flex"> %>
+          <%#= text_field_tag :search, params[:search], class: "form-control", placeholder: "Find a tour" %>
+          <%# <button data-action="click->remove#fire" class="btn btn-warning">Search</button> %>
+        <%# </div> %>
+      <%# end %>
+    <%# </div> %>
+  <%# </div> %>
   <% unless params[:search].present? %>
     <div class="mt-5" data-remove-target="removableElement">
       <%= render "banner" %>
@@ -20,7 +20,9 @@
   </div>
 
 
+
 <div class="container">
+
   <div class="row mt-5">
     <% @tours.each do |tour| %>
       <div class="col-4">

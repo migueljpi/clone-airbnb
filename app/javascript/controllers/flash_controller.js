@@ -7,6 +7,6 @@ export default class extends Controller {
     setTimeout(() => {
       this.element.classList.add('hidden');
       console.log('hidden applied');
-    }, 5000);
+    }, 4000);
   }
 }

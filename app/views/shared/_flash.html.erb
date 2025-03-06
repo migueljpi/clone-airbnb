@@ -1,0 +1,9 @@
+<% if flash[:notice] || flash[:alert] %>
+  <% flash.each do |type, message| %>
+    <div data-controller="flash">
+      <div class="flash-messages" id="flash-messages">
+        <h5><%= message %></h5>
+      </div>
+    </div>
+  <% end %>
+<% end %>

@@ -25,6 +25,7 @@
                 <% else %>
                   <p><%= booking.pax %> person</p>
                 <% end %>
+                <%= link_to "Tour guide: #{booking.tour.user.first_name}", user_path(booking.tour.user) %>
               </div>
               <div>
                 <% if booking.status == "Pending" %>

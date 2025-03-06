@@ -12,7 +12,9 @@
   border: #1B435D solid 2px;
   padding: 25px;
   border-radius: 15px;
-  transition: opacity 0.5s ease-out;
+  // transition: opacity 1s ease-in;
+  opacity: 0.8;
+  // animation: fadeIn 0.5s ease-in forwards;
 }
 
 .flash {
@@ -34,5 +36,6 @@
 }
 
 .hidden {
+  transition: opacity 2s ease-out;
   opacity: 0;
 }

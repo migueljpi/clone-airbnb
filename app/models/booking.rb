@@ -1,5 +1,5 @@
 class Booking < ApplicationRecord
-  STATUS = ["Pending", "Confirmed", "Cancelled", "Completed", "No Show", "Refunded", "Denied"]
+  STATUS = ["Pending", "Confirmed", "Cancelled", "Completed", "No Show", "Refunded", "Rejected"]
 
   belongs_to :user
   belongs_to :tour

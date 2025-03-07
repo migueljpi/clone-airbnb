@@ -30,3 +30,15 @@
     cursor: pointer;
   }
 }
+
+.footer-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.3rem;
+}
+
+.footer-text p {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}

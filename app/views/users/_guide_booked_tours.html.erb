@@ -25,13 +25,14 @@
                   <% else %>
                     <p><%= booking.pax %> person</p>
                   <% end %>
+                  <p>Client: <%= link_to booking.user.first_name, user_path(booking.user) %></p>
                 </div>
               </div>
               <div class="tourist-bought-bookings-info-user-show">
                 <% if booking.status == "Pending" %>
                   <div class="d-flex justify-content-center ">
                     <%= link_to "Confirm", accept_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch }, class: "btn btn-flat" %>
-                    <%= link_to "Deny", reject_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch }, class: "btn btn-warning" %>
+                    <%= link_to "Reject", reject_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch }, class: "btn btn-warning" %>
                   </div>
                 <% else %>
                   <div class="p-2 d-flex justify-content-center align-items-center text-center" style="background-color: #D5EEFF; border-radius: 15px">

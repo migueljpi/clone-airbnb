@@ -70,7 +70,6 @@
                 <%= render "tourist_bought_bookings" %>
               </div>
             </div>
-            <%# there's a div missing, but it is the only way that i works %>
 
             <%# PAST TOURS (Inside col-8) %>
             <div class="p-4 mt-5" style="background-color: #D5EEFF; border-radius: 15px">
@@ -84,30 +83,37 @@
           </div>
         </div>
       </div>
+        <%# there's some divs missing, but it is the only way that it works for some reason %>
     <% end %>
   </div> <%# END of First Row %>
 
   <%# ONLY FOR THE GUIDE (Separate Full-Width Section) %>
+
   <% if @user.guide && @user.id == current_user.id %>
     <div class="row">
-      <div class="col-12 p-4 mb-2" id="management" style="background-color: #1B435D; border-radius: 15px">
-        <div class="d-flex justify-content-center align-items-center text-center">
-          <h2>Booking Management</h2>
-        </div>
-        <div class="p-4 d-flex flex-wrap justify-content-center">
-          <%= render "guide_booked_tours" %>
+      <div class="col-12">
+        <div class="tour-guide-management p-4 mb-2 management" style="background-color: #1B435D; border-radius: 15px">
+          <div class="d-flex justify-content-center align-items-center text-center">
+            <h2>Booking Management</h2>
+          </div>
+          <div class="p-4 d-flex flex-wrap justify-content-center">
+            <%= render "guide_booked_tours" %>
+          </div>
         </div>
       </div>
-    </div> <%# END of Guide Booking Management %>
+    </div> <%# END da Guide Booking Management %>
+
     <div class="row">
-      <div class="col-12 p-4 mb-2" id="management" style="background-color: #1B435D; border-radius: 15px">
-        <div class="d-flex justify-content-center align-items-center text-center">
-          <h2>Past Bookings</h2>
-        </div>
-        <div class="p-4 d-flex flex-wrap justify-content-center">
-          <%= render "guide_past_tours" %>
+      <div class="col-12">
+        <div class="tour-guide-management p-4 mb-2 management" style="background-color: #1B435D; border-radius: 15px">
+          <div class="d-flex justify-content-center align-items-center text-center">
+            <h2>Past Bookings</h2>
+          </div>
+          <div class="p-4 d-flex flex-wrap justify-content-center">
+            <%= render "guide_past_tours" %>
+          </div>
         </div>
       </div>
-    </div> <%# END of Guide Booking Management %>
+    </div> <%# END da Guide Booking Management %>
   <% end %>
-</div>
+</div> <%# END of Container %>

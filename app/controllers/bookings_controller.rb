@@ -39,11 +39,11 @@ class BookingsController < ApplicationController
   def reject
     @booking = Booking.find(params[:id])
     if current_user == @booking.tour.user
-      @booking.update(status: "Denied")
+      @booking.update(status: "Rejected")
       if @booking.save
-        flash[:notice] = "Booking has been denied."
+        flash[:notice] = "Booking has been Rejected."
       else
-        flash[:notice] = "Failed to deny booking."
+        flash[:notice] = "Failed to Reject booking."
       end
     else
       flash[:notice] = "You are not authorized to reject this booking."

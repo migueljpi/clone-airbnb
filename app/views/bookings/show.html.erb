@@ -5,7 +5,7 @@
   <% elsif @booking.status == "Confirmed" %>
     <%= link_to 'Cancel', cancel_tour_booking_path(@booking.tour, @booking), method: :patch, class: 'btn btn-danger' %>
     <p>This booking has been confirmed!</p>
-  <% elsif @booking.status == "Denied" %>
-    <p>This booking has been denied.</p>
+  <% elsif @booking.status == "Rejected" %>
+    <p>This booking has been Rejected.</p>
   <% end %>
 </div>

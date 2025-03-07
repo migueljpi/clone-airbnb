@@ -25,7 +25,7 @@
                 <% else %>
                   <p><%= booking.pax %> person</p>
                 <% end %>
-                <%= link_to "Tour guide: #{booking.tour.user.first_name}", user_path(booking.tour.user) %>
+                <p>Guide: <%= link_to booking.tour.user.first_name, user_path(booking.tour.user) %></p>
               </div>
               <div>
                 <% if booking.status == "Pending" %>
@@ -36,7 +36,7 @@
                   <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(117, 255, 122); border-radius: 15px">
                     <p><%= booking.status %></p>
                   </div>
-                <% elsif booking.status == "Denied" %>
+                <% elsif booking.status == "Rejected" %>
                   <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(255, 117, 117); border-radius: 15px">
                     <p><%= booking.status %></p>
                   </div>
@@ -54,5 +54,6 @@
     <h3>Get ready to explore the world. <%= link_to "Book a tour", root_path, style: "text-decoration: none"%></h3>
   <% end %>
 <% else %>
-  <p>you are not authorized to view this user's bookings</p>
+  <p>You are not authorized to view this user's bookings</p>
+  <%# Eventually add in here the reviews that the client has made in the past %>
 <% end %>

@@ -16,8 +16,8 @@ class Tour < ApplicationRecord
   validates :category, inclusion: { in: CATEGORIES, message: "%<value>s is not a valid type" }
 
   include PgSearch::Model
-  pg_search_scope :search_by_name_and_location_and_description_and_starting_point_and_ending_point_and_sites_and_category,
-                  against: %i[name location description starting_point ending_point sites category],
+  pg_search_scope :search_by_name_and_location_and_description_and_sites_and_category,
+                  against: %i[name location description sites category],
                   associated_against: {
                     user: %i[first_name last_name language]
                   },

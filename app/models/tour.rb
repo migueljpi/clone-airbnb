@@ -1,4 +1,7 @@
 class Tour < ApplicationRecord
+  geocoded_by :location
+  after_validation :geocode, if: :will_save_change_to_location?
+
   CATEGORIES = ["Walking Tour", "Van Tour", "Bus Tour", "Free Tour", "Boat Tour"]
   has_many :bookings, dependent: :destroy
   has_many :users, through: :bookings
@@ -13,12 +16,12 @@ class Tour < ApplicationRecord
   validates :category, inclusion: { in: CATEGORIES, message: "%<value>s is not a valid type" }
 
   include PgSearch::Model
-    pg_search_scope :search_by_name_and_location_and_description_and_starting_point_and_ending_point_and_sites_and_category,
-    against: [ :name, :location, :description, :starting_point, :ending_point, :sites, :category ],
-    associated_against: {
-      user: [ :first_name, :last_name, :language ]
-    },
-    using: {
-      tsearch: { prefix: true }
-    }
+  pg_search_scope :search_by_name_and_location_and_description_and_starting_point_and_ending_point_and_sites_and_category,
+                  against: %i[name location description starting_point ending_point sites category],
+                  associated_against: {
+                    user: %i[first_name last_name language]
+                  },
+                  using: {
+                    tsearch: { prefix: true }
+                  }
 end

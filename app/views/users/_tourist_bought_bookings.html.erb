@@ -1,11 +1,10 @@
-
 <% if current_user.id == @user.id %>
   <% if @user.bookings.any? %>
     <% @user.bookings.each do |booking| %>
       <% if booking.date >= Date.today %>
         <div class="col-3">
           <div class="tourist-bought-bookings-user-show m-3" style="border-radius: 15px">
-            <div class="">
+            <div class="tour-photo">
               <% if booking.tour.photo %>
                 <%= cl_image_tag booking.tour.photo.key, width: 175, height: 100, crop: :fill %>
               <% else %>
@@ -39,11 +38,17 @@
                 <% elsif booking.status == "Rejected" %>
                   <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(255, 117, 117); border-radius: 15px">
                     <p><%= booking.status %></p>
+                  </div>~
+                <% else %>
+                  <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color: #D5EEFF; border-radius: 15px">
+                    <p><%= booking.status %></p>
                   </div>
                 <% end %>
               </div>
             </div>
-            <%= link_to "Cancel my tour", booking_destroy_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
+            <% if booking.status != "Cancelled"  %>
+              <%= link_to "Cancel", cancel_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
+            <% end %>
           </div>
         </div>
       <% end %>

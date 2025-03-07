@@ -32,8 +32,8 @@
         <%# BUTTONS GO HERE %>
         <div class="p-4 d-flex align-items-center sticky-top justify-content-center" id="buttons">
           <% if current_user.id == @user.id %>
-            <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-flat me-2" %>
-            <%= link_to "Delete Profile", user_registration_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-ghost" %>
+            <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-primary me-2 " %>
+            <%= link_to "Delete Profile", user_registration_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-delete" %>
           <% end %>
         </div>
       </div> <%# END of Sticky Profile Box %>

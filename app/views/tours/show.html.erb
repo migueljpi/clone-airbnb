@@ -3,7 +3,7 @@
   <div class="row">
 
     <header class="header pt-3">
-      <%= link_to "Back to Tours", root_path, class: "btn btn-back" %>
+      <%= link_to "< Back to Tours", root_path, class: "btn btn-back" %>
     </header>
 
     <h1 class="py-4"><%= @tour.name %></h1>
@@ -22,10 +22,10 @@
           <%= simple_form_for [@tour, @booking], url: tour_bookings_path(@tour) do |f| %>
             <%= f.input :date, as: :string, input_html: { data: { controller: "datepicker" } } %>
             <%= f.input :pax, input_html: { type: 'number', step: 1 }, label: "Number of participants" %>
-            <%= f.submit "Create a Booking", class: "btn btn-flat mt-2"%>
+            <%= f.submit "Create a Booking", class: "btn btn-action mt-2"%>
           <% end %>
         <% else %>
-        <h2 class="pt-5 pb-2 text-center">Book This Tour</h2>
+        <h2 class="pt-5 pb-2 text-center">Sign in to book a tour</h2>
         <div class="d-flex align-items-center justify-content-center" style="height: 50%;">
           <div class="d-grid">
             <%# <h2 class="py-3 text-center">Book This Tour</h2> %>

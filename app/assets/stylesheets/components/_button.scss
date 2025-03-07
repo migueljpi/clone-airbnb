@@ -1,26 +1,22 @@
 .btn {
   // color: white;
   padding: 8px 24px;
-  border-radius: 4px;
+  border-radius: 6px;
   transition: background 0.3s ease;
-
+  opacity: 1;
   &:hover {
-    // color: white;
+    opacity: 0.85;
   }
 
-  &.btn-flat {
-    background: $warning;
+  &.btn-action {
+    background: $orange;
     color: white;
-
-    &:hover {
-      background: #fb6e3b;
-      color: white;
-    }
   }
 
   &.btn-delete {
-    background: $danger;
-    color: white;
+    background: $white;
+    border: 1.5px solid $red;
+    color: $black;
 
     &:hover {
       background: rgb(227, 14, 14);
@@ -29,12 +25,31 @@
   }
 
   &.btn-back {
+    color: $dark-blue;
+    opacity: 1;
+    text-decoration: underline;
+    padding: 0;
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+  &.btn-primary {
     background: $primary;
     color: white;
-
+    opacity: 1;
 
     &:hover {
-      background: #0c334d;
+      opacity: 0.85;
+      color: white;
+    }
+  }
+  &.btn-secondary {
+    background: $primary;
+    color: white;
+    opacity: 1;
+
+    &:hover {
+      opacity: 0.85;
       color: white;
     }
   }

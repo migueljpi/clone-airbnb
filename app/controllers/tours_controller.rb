@@ -1,6 +1,7 @@
 class ToursController < ApplicationController
   def index
     @tours = Tour.all
+    # the 'geocoded' scope filters only tours with coordinates (latitude and longitude)
     @user = current_user
     @users = User.all
 
@@ -15,6 +16,11 @@ class ToursController < ApplicationController
     @user = current_user
     @booking = Booking.new(date: Date.today)
     @booking.user = current_user
+
+    @markers = [
+      { lat: @tour.starting_point_latitude, lng: @tour.starting_point_longitude },
+      { lat: @tour.ending_point_latitude, lng: @tour.ending_point_longitude }
+    ]
   end
 
   def new

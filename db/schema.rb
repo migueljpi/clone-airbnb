@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_28_211945) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_07_164713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,8 +59,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_28_211945) do
     t.string "location"
     t.text "description"
     t.integer "duration_in_hours"
-    t.string "starting_point"
-    t.string "ending_point"
     t.string "sites"
     t.string "category"
     t.integer "price"
@@ -68,6 +66,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_28_211945) do
     t.time "starting_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "starting_point_latitude"
+    t.float "starting_point_longitude"
+    t.float "ending_point_latitude"
+    t.float "ending_point_longitude"
     t.index ["user_id"], name: "index_tours_on_user_id"
   end
 

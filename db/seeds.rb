@@ -103,7 +103,6 @@ tour_data.each_with_index do |tour_info, i|
     tour.photo.attach(io: URI.open(tour_info[:photo_url]), filename: "#{tour_info[:location]}.png", content_type: 'image/png')
     tour.save!
     puts "created tour #{i+1} in #{tour_info[:location]}"
-    puts "Geocoded coordinates: #{tour.latitude}, #{tour.longitude}"
   rescue OpenURI::HTTPError => e
     puts "Failed to open URL: #{tour_info[:photo_url]}"
     puts "Error: #{e.message}"

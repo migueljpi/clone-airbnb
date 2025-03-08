@@ -22,17 +22,16 @@
           <%= simple_form_for [@tour, @booking], url: tour_bookings_path(@tour) do |f| %>
             <%= f.input :date, as: :string, input_html: { data: { controller: "datepicker" } } %>
             <%= f.input :pax, input_html: { type: 'number', step: 1 }, label: "Number of participants" %>
-            <%= f.submit "Create a Booking", class: "btn btn-action mt-2"%>
+            <%= f.submit "Book", class: "btn btn-action mt-2 btn-lg"%>
           <% end %>
         <% else %>
-        <h2 class="pt-5 pb-2 text-center">Sign in to book a tour</h2>
+        <h5 class="pt-5 pb-2 text-center">Sign up to book a tour</h5>
         <div class="d-flex align-items-center justify-content-center" style="height: 50%;">
-          <div class="d-grid">
-            <%# <h2 class="py-3 text-center">Book This Tour</h2> %>
-            <%= link_to "Login", new_user_session_path, class: "btn btn-login-signup" %>
-            <p class="p-1 mb-0 text-center">or</p>
-            <%= link_to "Sign up", new_user_registration_path, class: "btn btn-login-signup" %>
-          </div>
+          <%# <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-2"> %>
+            <%# <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
+            <%# <p class="m-0 fw-bold">/</p> %>
+            <%= link_to "Sign up", new_user_registration_path, class: "btn btn-action btn-lg my-2" %>
+          <%# </div> %>
         </div>
         <% end %>
       </div>

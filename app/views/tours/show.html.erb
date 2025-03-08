@@ -10,18 +10,18 @@
 
     <div class="two-columns pb-4">
       <div class="tour-img">
-        <%# <%= render @tour %>
         <%= cl_image_tag(@tour.photo.key) %>
         <%# <%= image_tag "tour1.jpg", alt: "Paris Tour", width: 500 %>
       </div>
 
       <div id="tour-show-booking-form">
-        <%# <% if user_signed_in? && !@user.guide %>
         <% if user_signed_in? %>
           <h2 class="py-3 text-center">Book This Tour</h2>
+          <div class=" d-flex justify-content-center">
           <%= simple_form_for [@tour, @booking], url: tour_bookings_path(@tour) do |f| %>
             <%= f.input :date, as: :string, input_html: { data: { controller: "datepicker" } } %>
             <%= f.input :pax, input_html: { type: 'number', step: 1 }, label: "Number of participants" %>
+            <div class="text-center">
             <%= f.submit "Book", class: "btn btn-action mt-2 btn-lg"%>
           <% end %>
         <% else %>
@@ -44,7 +44,7 @@
       <div class="tour-description">
         <h3 class="py-2">Tour Description</h3>
         <p><%= @tour.description %></p>
-        <p><strong>Price of Tour: </strong><%= @tour.price %> €</p>
+        <p><strong>Price of Tour: </strong><%= @tour.price %> € / person</p>
         <p><strong>Location: </strong><%= @tour.location %></p>
         <p class="text-popup"><strong>Tour Guide: </strong><%= link_to "#{@tour.user.first_name} #{@tour.user.last_name}", user_path(@tour.user) %></p>
       </div>

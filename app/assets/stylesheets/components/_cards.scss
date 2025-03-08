@@ -69,3 +69,12 @@
   -webkit-box-orient: vertical;
   word-break: break-word;
 }
+.card-link{
+    color: $dark-blue;
+    font-weight: 600px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    &:hover {
+      color: darken($dark-blue, 10%);
+    }
+}

@@ -1,9 +1,8 @@
 #tour-show-booking-form {
   background-color: $light-blue;
-  border-radius: 15px;
   padding: 25px;
   &:hover {
-    transition: all 500ms;
+    transition: all 750ms;
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   }
 }

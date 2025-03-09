@@ -17,10 +17,22 @@ class ToursController < ApplicationController
     @booking = Booking.new(date: Date.today)
     @booking.user = current_user
 
-    @markers = [
-      { lat: @tour.starting_point_latitude, lng: @tour.starting_point_longitude },
-      { lat: @tour.ending_point_latitude, lng: @tour.ending_point_longitude }
-    ]
+    @markers = []
+
+    # Add starting point marker
+    @markers << { lat: @tour.latitude, lng: @tour.longitude, label: 'Start' }
+
+    # Add ending point marker
+    ending_point_coords = Geocoder.coordinates(@tour.ending_point)
+    @markers << { lat: ending_point_coords[0], lng: ending_point_coords[1], label: 'End' } if ending_point_coords
+
+    # Add sightseeing spots markers
+    return unless @tour.sights.present?
+
+    @tour.sights.split('; ').each do |sight|
+      sight_coords = Geocoder.coordinates(sight)
+      @markers << { lat: sight_coords[0], lng: sight_coords[1], label: sight } if sight_coords
+    end
   end
 
   def new
@@ -40,6 +52,7 @@ class ToursController < ApplicationController
   private
 
   def tour_params
-    params.require(:tour).permit(:name, :location, :description, :duration_in_hours, :price, :category, :photo)
+    params.require(:tour).permit(:name, :location, :description, :duration_in_hours, :price, :category, :photo,
+                                 :starting_point, :ending_point, :sights)
   end
 end

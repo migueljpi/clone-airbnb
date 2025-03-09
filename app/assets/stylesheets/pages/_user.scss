@@ -3,8 +3,17 @@
 }
 
 #profile {
-  top: 110px;
+  top: 85px;
 }
+
+
+
+#profile-box {
+  background-color: $blue;
+  border-radius: 5px;
+  color: $light-gray;
+}
+
 .gray-box-wrapper{
   background-color: $light-gray;
   border-radius: 6px;

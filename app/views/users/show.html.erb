@@ -3,8 +3,8 @@
     <%# PERSONAL INFO (Left Side - Sticks to top when scrolling) %>
     <div class="col-4 p-4" id="profile">
       <div class="sticky-top">
-        <div class="p-4 d-flex flex-column align-items-center border-radius: 15px">
-          <div class="mb-4">
+        <div class="p-4 d-flex flex-column align-items-center" id="profile-box">
+          <div class="m-4">
             <% if @user.photo.key? %>
               <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, class: "avatar-user-show" %>
             <% else %>
@@ -21,29 +21,29 @@
           <div class="" id="profile-info">
             <p><strong>Speaks:</strong> <%= @user.language %></p>
             <p><strong>About me:</strong> <%= @user.about_me %></p>
-            <% if @user.guide && @user.id == current_user.id  %>
-              <p><strong><%= link_to "Create a new tour", new_tour_path %></strong></p>
+            <% if current_user && @user.id == current_user.id %>
+              <p><strong><%= link_to "Create a new tour", new_tour_path, class: "btn btn-primary" %></strong></p>
             <% end %>
           </div>
         </div>
         <%# BUTTONS GO HERE %>
-        <div class="p-4 d-flex align-items-center sticky-top justify-content-center" id="buttons">
-          <% if current_user.id == @user.id %>
+        <% if current_user && current_user.id == @user.id %>
+          <div class="p-4 d-flex align-items-center sticky-top justify-content-center" id="buttons">
             <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-primary me-2 " %>
             <%= link_to "Delete Profile", user_registration_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-delete" %>
-          <% end %>
-        </div>
+          </div>
+        <% end %>
       </div> <%# END of Sticky Profile Box %>
     </div> <%# END of Profile Column col-4 %>
 
     <%# PROVIDED TOURS AND REVIEWS %>
 
-    <% if @user.guide && @user.id != current_user.id %>
+    <% if !user_signed_in? || (@user.guide && @user.id != current_user.id)  %>
       <div class="col-8 p-4 d-flex flex-column gap-4" id="bookings">
         <div class="row">
           <div class="col-12">
             <%# Provided Tours %>
-            <div class="p-4" style="background-color: #D5EEFF; border-radius: 15px">
+            <div class="p-4 gray-box-wrapper" >
               <div class="d-flex flex-column align-items-center mb-4">
                 <h2>Tours provided</h2>
               </div>
@@ -54,7 +54,7 @@
           </div>
         </div>
 
-        <%# Reviews Section (Now directly after "Tours provided") %>
+        <%# Reviews Section %>
         <div class="row">
           <div class="col-12">
             <div class="p-4" style="background-color: #D5EEFF; border-radius: 15px">
@@ -99,7 +99,7 @@
     <% end %>
   </div> <%# END of First Row %>
 
-  <% if @user.guide && @user.id == current_user.id %>
+  <% if @user.guide && current_user && @user.id == current_user.id %>
     <div id="guide-booking-management">
       <div class="row">
         <div class="col-12">

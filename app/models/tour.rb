@@ -1,6 +1,6 @@
 class Tour < ApplicationRecord
-  geocoded_by :location
-  after_validation :geocode, if: :will_save_change_to_location?
+  # geocoded_by :location
+  # after_validation :geocode, if: :will_save_change_to_location?
 
   CATEGORIES = ["Walking Tour", "Van Tour", "Bus Tour", "Free Tour", "Boat Tour"]
   has_many :bookings, dependent: :destroy

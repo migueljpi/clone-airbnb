@@ -20,21 +20,16 @@ class ToursController < ApplicationController
     @markers = []
 
     # Add starting point marker
-    starting_point_coords = Geocoder.coordinates(@tour.starting_point)
-    if starting_point_coords
-      @markers << { lat: starting_point_coords[0], lng: starting_point_coords[1], label: 'Starting Point' }
-    end
+    @markers << { lat: @tour.latitude, lng: @tour.longitude, label: 'Start' }
 
     # Add ending point marker
     ending_point_coords = Geocoder.coordinates(@tour.ending_point)
-    if ending_point_coords
-      @markers << { lat: ending_point_coords[0], lng: ending_point_coords[1], label: 'Ending Point' }
-    end
+    @markers << { lat: ending_point_coords[0], lng: ending_point_coords[1], label: 'End' } if ending_point_coords
 
     # Add sightseeing spots markers
     return unless @tour.sights.present?
 
-    @tour.sights.split(', ').each do |sight|
+    @tour.sights.split('; ').each do |sight|
       sight_coords = Geocoder.coordinates(sight)
       @markers << { lat: sight_coords[0], lng: sight_coords[1], label: sight } if sight_coords
     end

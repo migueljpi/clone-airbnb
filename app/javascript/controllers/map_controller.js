@@ -13,12 +13,12 @@ export default class extends Controller {
     this.map = new mapboxgl.Map({
       container: this.element,
       style: 'mapbox://styles/mapbox/streets-v11', // style URL
-      center: [firstMarker.lng, firstMarker.lat], // Center the map on the first marker
-      zoom: 14 // starting zoom
+      center: [0, 0], // Center the map on the first marker
+      zoom: 2 // starting zoom
     })
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
-    // this.#drawLineBetweenMarkers()
+    this.#drawLineBetweenMarkers()
   }
 
   #fitMapToMarkers() {
@@ -31,38 +31,46 @@ export default class extends Controller {
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
+      const popup = new mapboxgl.Popup({ closeOnClick: false }).setText(marker.label)
+      const mapMarker = new mapboxgl.Marker()
       new mapboxgl.Marker()
         .setLngLat([marker.lng, marker.lat])
-        .addTo(this.map);
+        .setPopup(popup)
+        .addTo(this.map)
+
+        if (marker.label === 'Start' || marker.label === 'End') {
+          popup.addTo(this.map)
+        }
     })
   }
 
-  // #drawLineBetweenMarkers() {
-  //   const coordinates = this.markersValue.map(marker => [marker.lng, marker.lat])
-  //   this.map.on('load', () => {
-  //     this.map.addSource('route', {
-  //       'type': 'geojson',
-  //       'data': {
-  //         'type': 'Feature',
-  //         'properties': {},
-  //         'geometry': {
-  //           'type': 'LineString',
-  //           'coordinates': coordinates
-  //         }
-  //       }
-  //     })
-  //     this.map.addLayer({
-  //       'id': 'route',
-  //       'type': 'line',
-  //       'source': 'route',
-  //       'layout': {
-  //         'line-join': 'round',
-  //         'line-cap': 'round'
-  //       },
-  //       'paint': {
-  //         'line-color': '#888',
-  //         'line-width': 6
-  //       }
-  //     })
-  //   })
+  #drawLineBetweenMarkers() {
+    const coordinates = this.markersValue.map(marker => [marker.lng, marker.lat])
+    this.map.on('load', () => {
+      this.map.addSource('route', {
+        'type': 'geojson',
+        'data': {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'LineString',
+            'coordinates': coordinates
+          }
+        }
+      })
+      this.map.addLayer({
+        'id': 'route',
+        'type': 'line',
+        'source': 'route',
+        'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          'line-color': '#0E0000',
+          'line-width': 2
+        }
+      })
+    })
+  }
 }

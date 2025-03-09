@@ -7,14 +7,18 @@
   z-index: 1000;
   // width: 80%;
   text-align: center;
-  color: #1B435D;
-  background-color: #D5EEFF;
-  border: #1B435D solid 2px;
+  color: $dark-blue;
+  background-color: $light-gray;
+  border: $light-black solid 2px;
   padding: 25px;
   border-radius: 15px;
   // transition: opacity 1s ease-in;
   opacity: 0.8;
   // animation: fadeIn 0.5s ease-in forwards;
+}
+
+.flash-messages h5 {
+  margin: 0;
 }
 
 .flash {
@@ -24,15 +28,15 @@
 }
 
 .notice {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
+  background-color: $light-gray;
+  color: $green-success;
+  border: 1px solid $green-success;
 }
 
 .alert {
-  background-color: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+  background-color: $light-gray;
+  color: $red;
+  border: 1px solid $yellow-warning
 }
 
 .hidden {

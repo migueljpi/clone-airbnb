@@ -1,22 +1,17 @@
 .management h2 {
-  color: #78BBE6
+  color: #78BBE6;
+  // margin-top: 20px;
+  // margin-bottom: 20px;
 }
 
 #profile {
   top: 110px;
 }
-.gray-box-wrapper{
-  background-color: $light-gray;
-  border-radius: 6px;
-  padding: 20px;
-}
 
-.avatar-user-show {
-  width: 100%;
-  max-width: 300px;
+.Reject {
+  max-width: 100%;
   height: auto;
   border-radius: 50%;
-  object-fit: cover;
 
   @media (max-width: 768px) {
     max-width: 200px;

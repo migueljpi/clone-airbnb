@@ -13,7 +13,7 @@
     <%# </div> %>
   <%# </div> %>
   <% unless params[:search].present? %>
-    <div class="mt-5" data-remove-target="removableElement">
+    <div data-remove-target="removableElement">
       <%= render "banner" %>
     </div>
   <% end %>
@@ -31,12 +31,13 @@
           <div class="card-trip-infos">
             <div class="card-trip-description">
               <div>
-                <p><%= link_to tour.name, tour_path(tour) %></p>
+                <p><%= link_to tour.name, tour_path(tour), class:"card-link" %></p>
                 <p><%= tour.description %></p>
               </div>
               <h2 class="card-trip-pricing"><%= tour.price %>€</h2>
             </div>
             <%= cl_image_tag(tour.user.photo.key, class: "card-trip-user avatar-bordered") %>
+            <%# <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" /> %>
           </div>
         </div>
       </div>

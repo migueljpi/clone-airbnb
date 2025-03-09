@@ -1,32 +1,44 @@
 .navbar-lewagon {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
   background: $white;
+  padding: 12px 24px;
+  height: 5em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-lewagon .navbar-collapse {
   flex-grow: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  gap: 1rem;
+}
+.navbar-collapse{
+  min-width: 11em;
 }
 
-.navbar-lewagon .navbar-brand img {
+.navbar-brand img {
   width: 40px;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .nav-link {
   color: $dark-blue;
+  font-weight: 500;
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  text-decoration: none;
   transition: all 0.3s ease;
-  padding: 8px 16px;
-  height: 40px;
+  padding: 10px 16px;
+  border-radius: 8px;
   &:hover {
-    background-color: lightgray;
+    background-color: $light-gray;
     color: darken($dark-blue, 10%);
-    border-radius: 0.5rem
   }
 }
 
@@ -34,12 +46,9 @@
   font-size: 24px;
   color: $dark-blue;
   display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
   transition: all 0.3s ease;
   text-decoration: none;
-  padding: auto;
   &:hover {
     color: darken($dark-blue, 10%);
   }
@@ -48,18 +57,24 @@
 .nav-item {
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 2px 1em
+  padding: 4px 12px;
 }
+
 .nav-avatar-circle {
   font-size: 28px;
-  color: lightgray;
+  color: $dark-blue;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background-color: #f0f0f0;
+  background-color: $white;
+  box-shadow: $black;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  }
 }

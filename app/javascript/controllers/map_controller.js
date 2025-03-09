@@ -18,7 +18,7 @@ export default class extends Controller {
     })
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
-    // this.#drawLineBetweenMarkers()
+    this.#drawLineBetweenMarkers()
   }
 
   #fitMapToMarkers() {
@@ -37,32 +37,33 @@ export default class extends Controller {
     })
   }
 
-  // #drawLineBetweenMarkers() {
-  //   const coordinates = this.markersValue.map(marker => [marker.lng, marker.lat])
-  //   this.map.on('load', () => {
-  //     this.map.addSource('route', {
-  //       'type': 'geojson',
-  //       'data': {
-  //         'type': 'Feature',
-  //         'properties': {},
-  //         'geometry': {
-  //           'type': 'LineString',
-  //           'coordinates': coordinates
-  //         }
-  //       }
-  //     })
-  //     this.map.addLayer({
-  //       'id': 'route',
-  //       'type': 'line',
-  //       'source': 'route',
-  //       'layout': {
-  //         'line-join': 'round',
-  //         'line-cap': 'round'
-  //       },
-  //       'paint': {
-  //         'line-color': '#888',
-  //         'line-width': 6
-  //       }
-  //     })
-  //   })
+  #drawLineBetweenMarkers() {
+    const coordinates = this.markersValue.map(marker => [marker.lng, marker.lat])
+    this.map.on('load', () => {
+      this.map.addSource('route', {
+        'type': 'geojson',
+        'data': {
+          'type': 'Feature',
+          'properties': {},
+          'geometry': {
+            'type': 'LineString',
+            'coordinates': coordinates
+          }
+        }
+      })
+      this.map.addLayer({
+        'id': 'route',
+        'type': 'line',
+        'source': 'route',
+        'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          'line-color': '#888',
+          'line-width': 6
+        }
+      })
+    })
+  }
 }

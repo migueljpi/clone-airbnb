@@ -2,7 +2,11 @@
   <div class="container">
     <h1>Explore the world with your perfect guide!</h1>
     <p>Change your life and get the most insightful experience with a local person.</p>
-    <%= link_to "See all tours", "#all-tours", class: "btn btn-secondary btn-lg" %>
+    <%= link_to "#all-tours", class: "btn btn-secondary btn-lg" do %>
+    See all tours
+    <i class="fa-solid fa-arrow-down fs-6"></i>
+    <i class="fa-solid fa-arrow-down fs-6"></i>
+    <% end %>
   </div>
 </div>
 

@@ -5,52 +5,26 @@
         <% booking.status = "Completed" %>
       <% end %>
       <% if booking.date < Date.today %>
-        <div class="col-3">
-          <div class="tourist-bought-bookings-user-show m-3" style="border-radius: 15px">
-            <div class="">
-              <% if booking.tour.photo %>
-                <%= cl_image_tag booking.tour.photo.key, width: 175, height: 100, crop: :fill %>
-              <% else %>
-                <%= image_tag("https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=2073&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", width: 175, height: 90, style: "object-fit: cover")  %>
-              <% end %>
+        <div class="col-6">
+          <div class="card-trip m-3 position-relative">
+            <%= cl_image_tag(booking.tour.photo.key, class: "card-trip-user-image") %>
+            <div class="overlay p-3 d-flex justify-content-center align-items-center text-center" >
+              <h5><%= booking.status %></h5>
             </div>
-            <div class="tourist-bought-bookings-info-user-show p-3">
-              <div class="">
-                <div class="tourist-bought-bookings-infos-name">
-                  <p><%= link_to booking.tour.name, tour_path(booking.tour) %></p>
+            <div class="card-trip-infos d-flex justify-content-between">
+              <div class="card-trip-description">
+                <div>
+                  <p><%= link_to booking.tour.name, tour_path(booking.tour), class:"card-link" %></p>
+                  <p>Guide: <%= link_to booking.tour.user.first_name, user_path(booking.tour.user), class:"card-link" %></p>
+                  <p>Date: <%= booking.date %></p>
                 </div>
               </div>
-              <div class="mt-1 mb-1">
-                <p><%= booking.date %></p>
-                <% if booking.pax > 1 %>
-                  <p><%= booking.pax %> people</p>
-                <% else %>
-                  <p><%= booking.pax %> person</p>
-                <% end %>
-              </div>
-              <% if booking.status == "Pending" %>
-                <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color: #D5EEFF; border-radius: 15px">
-                  <p><%= booking.status %></p>
-                </div>
-              <% elsif booking.status == "Accepted" %>
-                <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(117, 255, 122); border-radius: 15px">
-                  <p><%= booking.status %></p>
-                </div>
-              <% elsif booking.status == "Rejected" %>
-                <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(255, 117, 117); border-radius: 15px">
-                  <p><%= booking.status %></p>
-                </div>
-              <% elsif booking.status == "Completed" %>
-                <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color: #D5EEFF; border-radius: 15px">
-                  <p><%= booking.status %></p>
-                </div>
-              <% elsif booking.status == "Cancelled" %>
-                <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color: #D5EEFF; border-radius: 15px">
-                  <p><%= booking.status %></p>
+              <% if booking.status == "Completed"%>
+                <div class="d-flex justify-content-center align-items-center mb-1" >
+                  <p><%= link_to "Review", new_tour_booking_review_path(booking.tour.id, booking.id), class: "btn btn-secondary" %></p>
                 </div>
               <% end %>
             </div>
-            <%#= link_to "Cancel my tour", booking_destroy_path(booking), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }  %>
           </div>
         </div>
       <% end %>

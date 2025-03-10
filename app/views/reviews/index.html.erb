@@ -1,0 +1,19 @@
+<div class="container">
+
+  <%= link_to "< Back to Profile", user_path(@user), class: "btn btn-secondary" %>
+
+  <h1>Reviews</h1>
+  <% @reviews_user.each do |review| %>
+    <strong><%= review.booking.tour.name %></strong>
+    <p>Guide Rating: <%= review.guide_rating %></p>
+    <p>Tour Rating: <%= review.tour_rating %></p>
+    <p>Review: <%= review.review_content %></p>
+    <%= link_to "Delete Review", user_review_path(@user, review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-delete" %>
+    <hr>
+      <%# <%= button_to "Destroy this restaurant", @restaurant, method: :delete %>
+  <% end %>
+
+<p><%= @reviews_user.count() %></p>
+
+
+</div>

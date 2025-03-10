@@ -1,0 +1,11 @@
+<div class="container">
+hello
+
+  <%= simple_form_for [@booking, @tour, @review], url: tour_booking_reviews_path(@booking) do |f| %>
+    <%= f.input :review_content %>
+    <%# <%= f.input :tour_rating, input_html: { type: 'number', step: 1 } %>
+    <%= f.input :tour_rating, html5: true %>
+    <%= f.input :guide_rating, html5: true %>
+    <%= f.submit %>
+  <% end %>
+</div>

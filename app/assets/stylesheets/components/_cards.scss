@@ -3,16 +3,27 @@
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
 
+
   h5 {
     margin: 0;
   }
 }
 
-.card-trip > img {
-  height: 200px;
-  width: 100%;
-  object-fit: cover;
+.card-trip > a {
+  img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
 }
+
+
+.card-trip > img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
 
 .card-trip h2 {
   font-size: 16px;

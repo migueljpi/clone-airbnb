@@ -27,7 +27,13 @@
     <% @tours.each do |tour| %>
       <div class="col-4">
         <div class="card-trip m-3">
-          <%= cl_image_tag(tour.photo.key) %>
+          <%#= cl_image_tag(tour.photo.key) %>
+
+
+            <%= link_to tour_path(tour) do %>
+              <%= image_tag(tour.photo) %>
+            <% end %>
+
           <div class="card-trip-infos">
             <div class="card-trip-description">
               <div>
@@ -36,7 +42,12 @@
               </div>
               <h2 class="card-trip-pricing"><%= tour.price %>€</h2>
             </div>
-            <%= cl_image_tag(tour.user.photo.key, class: "card-trip-user avatar-bordered") %>
+            <%#= cl_image_tag(tour.user.photo.key, class: "card-trip-user avatar-bordered") %>
+            <%#= tour.user.first_name %>
+            <%#= link_to "Your guide", user_path(tour.user) %>
+            <%= link_to user_path(tour.user) do %>
+              <%= image_tag(tour.user.photo, class: "card-trip-user avatar-bordered") %>
+            <% end %>
             <%# <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" /> %>
           </div>
         </div>

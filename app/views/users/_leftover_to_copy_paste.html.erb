@@ -1,0 +1,30 @@
+              <div>
+                <% if booking.status == "Pending" %>
+                  <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color: #D5EEFF; border-radius: 15px">
+                    <p><%= booking.status %></p>
+                  </div>
+                <% elsif booking.status == "Confirmed" %>
+                  <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(117, 255, 122); border-radius: 15px">
+                    <p><%= booking.status %></p>
+                  </div>
+                <% elsif booking.status == "Rejected" %>
+                  <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color:rgb(255, 117, 117); border-radius: 15px">
+                    <p><%= booking.status %></p>
+                  </div>~
+                <% else %>
+                  <div class=" p-2 d-flex justify-content-center align-items-center text-center" style="background-color: #D5EEFF; border-radius: 15px">
+                    <p><%= booking.status %></p>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <% if booking.status != "Cancelled"  %>
+              <%= link_to "Cancel", cancel_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %>
+            <% end %>
+          </div>
+
+
+
+<p><%= link_to "Accept", accept_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %></p>
+<p><%= link_to "Reject", reject_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %></p>
+<p><%= link_to "Refund", refund_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch } %></p>

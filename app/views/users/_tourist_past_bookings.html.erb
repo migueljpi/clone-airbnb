@@ -21,7 +21,7 @@
               </div>
               <% if booking.status == "Completed"%>
                 <div class="d-flex justify-content-center align-items-center mb-1" >
-                  <p><%= link_to "Review", root_path, class: "btn btn-secondary" %></p>
+                  <p><%= link_to "Review", new_tour_booking_review_path(booking.tour.id, booking.id), class: "btn btn-secondary" %></p>
                 </div>
               <% end %>
             </div>

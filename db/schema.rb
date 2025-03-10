@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_03_09_094328) do
+ActiveRecord::Schema[7.2].define(version: 2025_03_10_132048) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_09_094328) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.text "review_content"
+    t.integer "tour_rating"
+    t.integer "guide_rating"
+    t.bigint "booking_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_reviews_on_booking_id"
+  end
+
   create_table "tours", force: :cascade do |t|
     t.string "name"
     t.string "location"
@@ -70,6 +80,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_09_094328) do
     t.text "sights"
     t.float "latitude"
     t.float "longitude"
+    t.float "tour_average_rating"
     t.index ["user_id"], name: "index_tours_on_user_id"
   end
 
@@ -95,5 +106,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_03_09_094328) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "tours"
   add_foreign_key "bookings", "users"
+  add_foreign_key "reviews", "bookings"
   add_foreign_key "tours", "users"
 end

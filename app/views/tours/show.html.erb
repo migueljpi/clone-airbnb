@@ -1,6 +1,5 @@
 <div class="container">
 
-  <div class="row">
 
     <header class="header pt-3">
       <%= link_to "< Back to Tours", root_path, class: "btn btn-back" %>
@@ -8,48 +7,53 @@
 
     <h1 class="py-4"><%= @tour.name %></h1>
 
-    <div class="two-columns pb-4">
-      <div class="tour-img">
-        <%= cl_image_tag(@tour.photo.key) %>
-        <%# <%= image_tag "tour1.jpg", alt: "Paris Tour", width: 500 %>
+    <div class="row">
+
+      <%# <div class="two-columns pb-4"> %>
+      <div class="col-6 pb-4">
+        <div class="tour-img">
+          <%= cl_image_tag(@tour.photo.key) %>
+          <%# <%= image_tag "tour1.jpg", alt: "Paris Tour", width: 500 %>
+        </div>
       </div>
 
-      <div id="tour-show-booking-form">
+      <div id="tour-show-booking-form col-6">
         <% if user_signed_in? %>
           <h2 class="py-3 text-center">Book This Tour</h2>
-          <div class=" d-flex justify-content-center">
-          <%= simple_form_for [@tour, @booking], url: tour_bookings_path(@tour) do |f| %>
-            <%= f.input :date, as: :string, input_html: { data: { controller: "datepicker" } } %>
-            <%= f.input :pax, input_html: { type: 'number', step: 1 }, label: "Number of participants" %>
-            <div class="text-center">
-            <%= f.submit "Book", class: "btn btn-action mt-2 btn-lg"%>
-          <% end %>
+          <div class="d-flex justify-content-center">
+            <%= simple_form_for [@tour, @booking], url: tour_bookings_path(@tour) do |f| %>
+              <%= f.input :date, as: :string, input_html: { data: { controller: "datepicker" } } %>
+              <%= f.input :pax, input_html: { type: 'number', step: 1 }, label: "Number of participants" %>
+              <div class="text-center">
+                <%= f.submit "Book", class: "btn btn-action mt-2 btn-lg"%>
+              </div>
+            <% end %>
+          </div>
         <% else %>
-        <h5 class="pt-5 pb-2 text-center">Sign up to book a tour</h5>
-        <div class="d-flex align-items-center justify-content-center" style="height: 50%;">
-          <%# <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-2"> %>
-            <%# <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
-            <%# <p class="m-0 fw-bold">/</p> %>
-            <%= link_to "Sign up", new_user_registration_path, class: "btn btn-action btn-lg my-2" %>
-          <%# </div> %>
-        </div>
+          <h5 class="pt-5 pb-2 text-center">Sign up to book a tour</h5>
+          <div class="d-flex align-items-center justify-content-center" style="height: 50%;">
+            <%# <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-2"> %>
+              <%# <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
+              <%# <p class="m-0 fw-bold">/</p> %>
+              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-action btn-lg my-2" %>
+            <%# </div> %>
+          </div>
         <% end %>
       </div>
     </div>
 
-  </div>
-
-  <div class="row">
-    <div class="two-columns pb-4">
-      <div class="tour-description">
+  <div class="row my-5">
+    <%# <div class="two-columns pb-4"> %>
+    <div class="tour-description col-6 pb-4">
+      <%# <div class=""> %>
         <h3 class="py-2">Tour Description</h3>
         <p><%= @tour.description %></p>
         <p><strong>Price of Tour: </strong><%= @tour.price %> € / person</p>
         <p><strong>Location: </strong><%= @tour.location %></p>
         <p class="text-popup"><strong>Tour Guide: </strong><%= link_to "#{@tour.user.first_name} #{@tour.user.last_name}", user_path(@tour.user) %></p>
-      </div>
+    </div>
 
-
+    <div class="col-6 pb-4">
       <div data-controller="map"
         id='map'
         class="rounded-map"
@@ -58,6 +62,24 @@
         style='width: 100%; height: 300px;'>
       </div>
     </div>
+
+    <div class="col-6 pb-4">
+      <h3>Reviews</h3>
+
+      <% @reviews_tour.each do |review| %>
+        <strong><%= review.booking.user.first_name %></strong>
+        <p>Guide Rating: <%= review.guide_rating %></p>
+        <p>Tour Rating: <%= review.tour_rating %></p>
+        <p>Review: <%= review.review_content %></p>
+        <hr>
+      <% end %>
+
+      <h3>Reviews average</h3>
+      <%= @tour.tour_average_rating %>
+    </div>
+
+
+
   </div>
 
 </div>

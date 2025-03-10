@@ -1,1 +1,16 @@
+<h2>Average rating</h2>
+<p><%= @user.guide_average_rating %></p>
+
+<hr>
+
 <h2>Reviews go here</h2>
+<div>
+    <% @reviews_guide.each do |review| %>
+        <p><strong><%= review.booking.user.first_name %></strong></p>
+        <p><strong><%= review.booking.tour.name %></strong></p>
+        <p>Guide Rating: <%= review.guide_rating %></p>
+        <p>Tour Rating: <%= review.tour_rating %></p>
+        <p>Review: <%= review.review_content %></p>
+        <hr>
+      <% end %>
+</div>

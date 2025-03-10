@@ -17,6 +17,9 @@ class ToursController < ApplicationController
     @booking = Booking.new(date: Date.today)
     @booking.user = current_user
 
+    @bookings_reviewed = Booking.where(tour_id: @tour.id)
+    @reviews_tour = Review.where(booking_id: @bookings_reviewed.pluck(:id))
+
     @markers = []
 
     # Add starting point marker

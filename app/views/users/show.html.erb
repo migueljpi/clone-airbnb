@@ -22,7 +22,7 @@
             <p><strong>Speaks:</strong> <%= @user.language %></p>
             <p><strong>About me:</strong> <%= @user.about_me %></p>
             <% if current_user && @user.id == current_user.id %>
-              <p><strong><%= link_to "Create a new tour", new_tour_path, class: "btn btn-primary" %></strong></p>
+              <p><strong><%= link_to "Create a new tour", new_tour_path, class: "btn btn-secondary" %></strong></p>
             <% end %>
           </div>
         </div>

@@ -25,4 +25,12 @@ class Tour < ApplicationRecord
                   using: {
                     tsearch: { prefix: true }
                   }
+
+  def update_tour_avg_rating
+    ratings = reviews.pluck(:tour_rating).reject(&:nil?)
+
+    new_rating = ratings.empty? ? nil : (ratings.sum.to_f / ratings.size)
+
+    update(tour_average_rating: new_rating)
+  end
 end

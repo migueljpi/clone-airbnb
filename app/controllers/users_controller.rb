@@ -6,8 +6,8 @@ class UsersController < ApplicationController
     Rails.logger.debug "Bookings loaded for guide: #{@bookings.pluck(:id, :status)}"
     @tours = Tour.where(user_id: @user.id).order(updated_at: :desc).to_a
 
+    @reviews_guide = Review.joins(booking: :tour).where(tours: { user_id: @user.id })
   end
-
 
   private
 

@@ -1,10 +1,16 @@
 class ReviewsController < ApplicationController
+  def index
+    @reviews = Review.all
+    @user = current_user
+    @bookings_reviewed = Booking.where(user_id: @user.id)
+    @reviews_user = Review.where(booking_id: @bookings_reviewed.pluck(:id))
+
+    # @reviews_guide = Review.joins(booking: :tour).where(tours: { user_id: @user.id })
+  end
+
   def new
-    # raise
     @booking = Booking.find(params[:booking_id])
     @review = Review.new
-    # @trainer = Trainer.find(params[:id])
-    # @pokeball = @trainer.pokeballs
   end
 
   def create
@@ -13,21 +19,18 @@ class ReviewsController < ApplicationController
     @review.booking = @booking
     @review.booking.user = current_user
     if @review.save
+      @review.booking.tour.update_tour_avg_rating
       redirect_to user_path(current_user)
       flash[:notice] = "Review was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
-    # @booking = Booking.new(booking_params)
-    # @tour = Tour.find(params[:tour_id])
-    # @booking.tour = @tour
-    # @booking.user = current_user
-    # if @booking.save
-    #   redirect_to user_path(current_user)
-    #   flash[:notice] = "Booking was successfully created."
-    # else
-    #   render :new, status: :unprocessable_entity
-    # end
+  end
+
+  def destroy
+    @review = Review.find(params[:id])
+    @review.destroy
+    redirect_to user_reviews_path(current_user), notice: "Review was successfully deleted."
   end
 
   private
@@ -35,8 +38,4 @@ class ReviewsController < ApplicationController
   def review_params
     params.require(:review).permit(:review_content, :tour_rating, :guide_rating)
   end
-
-  # def booking_params
-  #   params.require(:booking).permit(:date, :pax, :status)
-  # end
 end

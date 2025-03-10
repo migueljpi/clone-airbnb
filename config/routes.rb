@@ -28,7 +28,13 @@ Rails.application.routes.draw do
         end
     end
   end
+
+  # not needed?
   get "users/:id" => "users#show", as: :user
+
+  resources :users, only: [:show] do
+    resources :reviews, only: [:index, :destroy]
+  end
 
   get "bookings/:id/edit" => "bookings#edit", as: :booking_edit
   patch "bookings/:id" => "bookings#update", as: :booking

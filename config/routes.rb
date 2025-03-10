@@ -17,14 +17,15 @@ Rails.application.routes.draw do
   # Defines the routes for the posts resource
   resources :tours, only: [:index, :show, :new, :create] do
     resources :bookings, only: [:new, :create, :show] do
-      member do
-        patch :accept
-        patch :reject
-        patch :cancel
-        patch :complete
-        patch :no_show
-        patch :refund
-      end
+      resources :reviews, only: [:new, :create]
+        member do
+          patch :accept
+          patch :reject
+          patch :cancel
+          patch :complete
+          patch :no_show
+          patch :refund
+        end
     end
   end
   get "users/:id" => "users#show", as: :user

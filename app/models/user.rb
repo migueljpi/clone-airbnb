@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :bookings, dependent: :destroy
   has_many :tours, through: :bookings
+  has_many :reviews, through: :bookings
   has_one_attached :photo
   has_many :tours, dependent: :destroy
   validates :email, presence: true
@@ -17,4 +18,11 @@ class User < ApplicationRecord
   validates :language, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+  def guide_average_rating
+    return unless guide
+
+    all_ratings = Review.joins(booking: :tour).where(tours: { user_id: id }).pluck(:guide_rating)
+    @guide_average_rating = all_ratings.sum.to_f / all_ratings.count
+  end
 end

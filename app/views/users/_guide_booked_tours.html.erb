@@ -2,7 +2,7 @@
   <% if @bookings.any? %>
     <% @bookings.each do |booking| %>
       <% if booking.tour.user_id == @user.id && booking.date >= Date.today %>
-        <div class="col-4">
+        <div class="col-6">
           <div class="card-trip m-3 position-relative">
             <%= cl_image_tag(booking.tour.photo.key, class: "card-trip-user-image") %>
             <% if booking.status == "Pending" %>

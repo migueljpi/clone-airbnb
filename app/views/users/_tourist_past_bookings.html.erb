@@ -19,9 +19,9 @@
                   <p>Date: <%= booking.date %></p>
                 </div>
               </div>
-              <% if booking.status == "Completed"%>
+              <% if booking.status == "Completed" && booking.review.nil? %>
                 <div class="d-flex justify-content-center align-items-center mb-1" >
-                  <p><%= link_to "Review", new_tour_booking_review_path(booking.tour.id, booking.id), class: "btn btn-secondary" %></p>
+                  <%= link_to "Review", new_tour_booking_review_path(booking.tour.id, booking.id), class: "btn btn-secondary" %>
                 </div>
               <% end %>
             </div>

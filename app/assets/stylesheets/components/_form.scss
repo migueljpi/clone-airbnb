@@ -7,3 +7,42 @@
     box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   }
 }
+
+.form-container {
+  max-width: 60%;
+  min-width: 50%;
+  margin: 50px auto;
+  padding: 30px;
+  background: $white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: start;
+  overflow: hidden;
+  word-wrap: break-word;
+  white-space: normal;
+
+  h2 {
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    color: $dark-blue;
+    margin-bottom: 20px;
+  }
+
+  .form-actions {
+    padding: 10px 0;
+  }
+
+  .link {
+    color: $dark-blue;
+    opacity: 1;
+    text-decoration: none;
+    padding: 0;
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+  .max-width {
+    max-width: 300px;
+  }
+}

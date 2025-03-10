@@ -2,7 +2,7 @@
   <% if @bookings.any? %>
     <% @bookings.each do |booking| %>
       <% if booking.tour.user_id == @user.id && booking.date >= Date.today %>
-        <div class="col-3">
+        <div class="col-4">
           <div class="card-trip m-3 position-relative">
             <%= cl_image_tag(booking.tour.photo.key, class: "card-trip-user-image") %>
             <% if booking.status == "Pending" %>
@@ -32,7 +32,7 @@
               </div>
               <% if booking.status == "Confirmed" && Date.today >= booking.date %>
                 <div class="d-flex justify-content-center align-items-center mb-1" >
-                  <%= link_to "Declare No Show", no_show_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch }, class: "btn btn-secondary" %>
+                  <%= link_to "No Show", no_show_tour_booking_path(booking.tour, booking), data: { turbo_method: :patch }, class: "btn btn-secondary" %>
                 </div>
               <% end %>
             </div>

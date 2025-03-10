@@ -1,9 +1,24 @@
-.management h2 {
-  color: #78BBE6
+.management {
+  border-radius: 15px;
+  background-color: $blue;
+  border: $dark-blue solid 2px;
+  &:hover {
+    transition: all 250ms;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  }
+
+  h2, h4 {
+    color: $light-gray;
+  }
 }
+
+// .management h2, h5 {
+//   color: $light-gray;
+// }
 
 #profile {
   top: 85px;
+
 }
 
 
@@ -13,12 +28,18 @@
   border-radius: 5px;
   color: $light-gray;
   border: $dark-blue solid 2px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
 }
 
 .gray-box-wrapper{
   background-color: $light-gray;
-  border-radius: 6px;
-  padding: 20px;
+  border-radius: 15px;
+  padding: 25px;
+
+  &:hover {
+    transition: all 250ms;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  }
 }
 
 .avatar-user-show {

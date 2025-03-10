@@ -5,7 +5,7 @@
         <% if booking.status == "Pending" || booking.status == "Confirmed" %>
           <% booking.status = "Completed" %>
         <% end %>
-        <div class="col-4">
+        <div class="col-6">
           <div class="card-trip m-3 position-relative">
             <%= cl_image_tag(booking.tour.photo.key, class: "card-trip-user-image") %>
             <% if booking.status == "Pending" %>

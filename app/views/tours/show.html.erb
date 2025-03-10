@@ -7,17 +7,18 @@
 
     <h1 class="py-4"><%= @tour.name %></h1>
 
-    <div class="row">
-
-      <%# <div class="two-columns pb-4"> %>
-      <div class="col-6 pb-4">
-        <div class="tour-img">
-          <%= cl_image_tag(@tour.photo.key) %>
-          <%# <%= image_tag "tour1.jpg", alt: "Paris Tour", width: 500 %>
-        </div>
+  <!-- Row for Image & Booking Form -->
+  <div class="row">
+    <!-- Tour Image -->
+    <div class="col-md-6 pb-4">
+      <div class="tour-img">
+        <%= cl_image_tag(@tour.photo.key) %>
       </div>
+    </div>
 
-      <div id="tour-show-booking-form col-6">
+    <!-- Booking Form / Sign-Up -->
+    <div class="col-md-6">
+      <div id="tour-show-booking-form">
         <% if user_signed_in? %>
           <h2 class="py-3 text-center">Book This Tour</h2>
           <div class="d-flex justify-content-center">
@@ -30,17 +31,14 @@
             <% end %>
           </div>
         <% else %>
-          <h5 class="pt-5 pb-2 text-center">Sign up to book a tour</h5>
-          <div class="d-flex align-items-center justify-content-center" style="height: 50%;">
-            <%# <div class="d-flex flex-column flex-md-row align-items-center justify-content-center gap-2"> %>
-              <%# <%= link_to "Login", new_user_session_path, class: "btn btn-primary" %>
-              <%# <p class="m-0 fw-bold">/</p> %>
-              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-action btn-lg my-2" %>
-            <%# </div> %>
+          <h5 class="pt-5 pb-2 text-center">Login to book a tour</h5>
+          <div class="d-flex align-items-center justify-content-center">
+            <%= link_to "Login", new_user_session_path, class: "btn btn-action btn-lg my-2" %>
           </div>
         <% end %>
       </div>
     </div>
+  </div>
 
   <div class="row my-5">
     <%# <div class="two-columns pb-4"> %>

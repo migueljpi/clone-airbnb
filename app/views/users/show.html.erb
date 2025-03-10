@@ -71,6 +71,7 @@
             <div>
               <div class="mb-2">
                 <h2>Requested Tours</h2>
+                <h4>Get ready to explore the world.</h4>
               </div>
               <div class="row d-flex flex-wrap justify-content-start">
                 <%= render "tourist_bought_bookings" %>
@@ -80,7 +81,7 @@
           <div class="col-12">
             <div>
               <div class="mb-2">
-                <h2>Past Tours</h2>
+                <h4>Don't forget to leave a review.</h4>
               </div>
               <div class="row d-flex flex-wrap justify-content-start">
                 <%= render "tourist_past_bookings" %>
@@ -91,6 +92,7 @@
         <%# END OF UPCOMING TOURS %>
 
         <%# START OF BOOKING MANAGEMENT %>
+        <% if current_user.id == @user.id && @user.guide %>
         <div class="row">
           <div class="col-12">
             <div>
@@ -117,6 +119,7 @@
             </div>
           </div>
         </div>
+        <% end %>
         <%# END OF BOOKING MANAGEMENT %>
       <% end %>
     </div> <%# END col-8 %>

@@ -21,16 +21,16 @@
           <div class="d-flex flex-column align-items-center" id="profile-info">
             <p><strong>Speaks:</strong> <%= @user.language %></p>
             <p><strong>About me:</strong> <%= @user.about_me %></p>
-            <% if current_user && @user.id == current_user.id %>
-              <p><strong><%= link_to "Create a new tour", new_tour_path, class: "btn btn-secondary" %></strong></p>
-            <% end %>
           </div>
         </div>
         <%# BUTTONS GO HERE %>
         <% if current_user && current_user.id == @user.id %>
-          <div class="p-4 d-flex align-items-center sticky-top justify-content-center" id="buttons">
-            <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-primary me-2 " %>
-            <%= link_to "Delete Profile", user_registration_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-delete" %>
+          <div class="p-4 d-flex flex-column align-items-center sticky-top justify-content-center" id="buttons">
+            <% if current_user && @user.id == current_user.id && @user.guide  %>
+              <p><strong><%= link_to "Create a new tour", new_tour_path, class: "btn btn-secondary" %></strong></p>
+            <% end %>
+            <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-primary mb-3" %>
+            <%= link_to "Delete Profile", user_registration_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-delete mb-2" %>
           </div>
         <% end %>
       </div> <%# END of Sticky Profile Box %>

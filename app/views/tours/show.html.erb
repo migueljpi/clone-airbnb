@@ -47,16 +47,11 @@
       <%# <div class=""> %>
         <h2 class="py-2">Tour Description</h2>
 
-        <div class="py-3">
-          <h4>Average Rating</h4>
-          <%= @tour.tour_average_rating %>
-        </div>
-
         <p><%= @tour.description %></p>
         <p><strong>Sights: </strong><%= @tour.sights %></p>
 
         <p><strong>Category: </strong><%= @tour.category %></p>
-        <p><strong>Length: </strong><%= @tour.duration_in_hours %></p>
+        <p><strong>Length: </strong><%= @tour.duration_in_hours %> hours</p>
         <%# <p><strong>Starting time: </strong><%= @tour.starting_time %>
         <p><strong>Starting point: </strong><%= @tour.starting_point %></p>
         <p><strong>Ending point: </strong><%= @tour.ending_point %></p>
@@ -77,31 +72,19 @@
 
     <% if @reviews_tour.present? %>
       <div class="pb-4">
-        <h3 class= "pb-3">Reviews</h3>
+        <h3 class= "pb-3">Reviews (<%= @tour.tour_average_rating.round(1) %>)</h3>
 
         <% @reviews_tour.each do |review| %>
         <div class="row">
           <div class="d-flex col-sm-3 col-lg-1 py-2"><strong><%= review.booking.user.first_name %>:</strong></div>
-          <div class="d-flex col-sm-9 col-lg-11"> <p class="fw-lighter fst-italic py-2 text-start">"<%= review.review_content %>"</p></div>
+          <div class="d-flex col-sm-9 col-lg-11 py-2">
+            <%= render "shared/review_content", review: review %>
+          </div>
         </div>
 
-          <p>
-            Tour:
-            <% review.tour_rating.to_i.times do  %>
-              <i class="bi bi-star-fill"></i>
-            <% end %>
-            (<%= review.tour_rating %>)
-          </p>
+        <%= render "shared/review_stars", review: review %>
 
-          <p>
-            <%= link_to review.booking.tour.user.first_name, class: "btn btn-primary my-3" %>
-            <% review.guide_rating.to_i.times do  %>
-              <i class="bi bi-star-fill"></i>
-            <% end %>
-            (<%= review.guide_rating %>)
-          </p>
-
-          <hr>
+        <hr>
         <% end %>
 
       </div>

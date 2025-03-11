@@ -1,0 +1,15 @@
+<p>
+  Tour:
+  <% review.tour_rating.to_i.times do  %>
+    <i class="bi bi-star-fill"></i>
+  <% end %>
+  (<%= review.tour_rating %>)
+</p>
+
+<p>
+  <%= review.booking.tour.user.first_name %>:
+  <% review.guide_rating.to_i.times do  %>
+    <i class="bi bi-star-fill"></i>
+  <% end %>
+  (<%= review.guide_rating %>)
+</p>

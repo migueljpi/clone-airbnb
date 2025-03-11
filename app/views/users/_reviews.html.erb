@@ -1,16 +1,16 @@
-<h2>Average rating</h2>
-<p><%= @user.guide_average_rating %></p>
+<h2>Reviews (<%= @user.guide_average_rating.round(1) %>)</h2>
 
-<hr>
+<% if @reviews_guide.present? %>
+  <div class="py-3">
+      <% @reviews_guide.each do |review| %>
+          <p><strong><%= review.booking.user.first_name %> said about <%= review.booking.tour.name %></strong></p>
 
-<h2>Reviews go here</h2>
-<div>
-    <% @reviews_guide.each do |review| %>
-        <p><strong><%= review.booking.user.first_name %></strong></p>
-        <p><strong><%= review.booking.tour.name %></strong></p>
-        <p>Guide Rating: <%= review.guide_rating %></p>
-        <p>Tour Rating: <%= review.tour_rating %></p>
-        <p>Review: <%= review.review_content %></p>
-        <hr>
-      <% end %>
-</div>
+          <%= render "shared/review_content", review: review %>
+          <%= render "shared/review_stars", review: review %>
+
+          <hr>
+        <% end %>
+  </div>
+  <% else %>
+    <p class="fw-light"> <%= @user.first_name %> has no reviews yet.</p>
+  <% end %>

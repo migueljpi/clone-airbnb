@@ -1,18 +1,41 @@
 <div class="container">
 
-  <%= link_to "< Back to Profile", user_path(@user), class: "btn btn-secondary" %>
+  <%= link_to "< Back to Profile", user_path(@user), class: "btn btn-primary my-3" %>
 
-  <h1>Reviews</h1>
-  <% @reviews_user.each do |review| %>
-    <strong><%= review.booking.tour.name %></strong>
-    <p>Guide Rating: <%= review.guide_rating %></p>
-    <p>Tour Rating: <%= review.tour_rating %></p>
-    <p>Review: <%= review.review_content %></p>
-    <%= link_to "Delete Review", user_review_path(@user, review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-delete" %>
-    <hr>
-      <%# <%= button_to "Destroy this restaurant", @restaurant, method: :delete %>
+  <h1 class="my-4">My Reviews</h1>
+
+  <% if @reviews_user.present? %>
+    <% @reviews_user.each do |review| %>
+      <%# <strong><%= review.booking.tour.name %>
+      <h3 class="my-3"><%= review.booking.tour.name %></h3>
+      <% if review.review_content.present?   %>
+        <p class="fw-lighter fst-italic">"<%= review.review_content %>"</p>
+      <% end %>
+      <%# <p>Tour Rating: <%= review.tour_rating %>
+      <p>
+        Tour:
+        <% review.tour_rating.to_i.times do  %>
+          <i class="bi bi-star-fill"></i>
+        <% end %>
+      </p>
+
+      <%# <p>Guide Rating: <%= review.guide_rating %>
+      <p>
+        <%# <%= link_to review.booking.tour.name, user_path(@user), class: "btn btn-primary my-3" %>
+        <%= link_to review.booking.tour.user.first_name, class: "btn btn-primary my-3" %>
+        <% review.guide_rating.to_i.times do  %>
+          <i class="bi bi-star-fill"></i>
+        <% end %>
+      </p>
+
+      <%= link_to "Delete Review", user_review_path(@user, review), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-delete" %>
+      <hr>
+        <%# <%= button_to "Destroy this restaurant", @restaurant, method: :delete %>
+    <% end %>
+  <% else %>
+    <p class="fw-lighter fst-italic">You have no reviews yet. Write one for one of your previous tours here: </p>
+    <%= link_to "Write Review", "#{user_path(@user)}#to-review", class: "btn btn-secondary my-3" %>
   <% end %>
-
 <p><%= @reviews_user.count() %></p>
 
 

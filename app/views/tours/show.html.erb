@@ -2,10 +2,10 @@
 
 
     <header class="header pt-3">
-      <%= link_to "< Back to Tours", root_path, class: "btn btn-back" %>
+      <%= link_to "< Back to All Tours", root_path, class: "btn btn-primary" %>
     </header>
 
-    <h1 class="py-4"><%= @tour.name %></h1>
+    <h1 class="mt-3 mb-5 text-center"><%= @tour.name %></h1>
 
   <!-- Row for Image & Booking Form -->
   <div class="row">
@@ -18,7 +18,8 @@
 
     <!-- Booking Form / Sign-Up -->
     <div class="col-md-6">
-      <div id="tour-show-booking-form">
+      <%# <div id="tour-show-booking-form"> %>
+      <div class="form-container">
         <% if user_signed_in? %>
           <h2 class="py-3 text-center">Book This Tour</h2>
           <div class="d-flex justify-content-center">
@@ -44,10 +45,23 @@
     <%# <div class="two-columns pb-4"> %>
     <div class="tour-description col-6 pb-4">
       <%# <div class=""> %>
-        <h3 class="py-2">Tour Description</h3>
+        <h2 class="py-2">Tour Description</h2>
+
+        <div class="py-3">
+          <h4>Average Rating</h4>
+          <%= @tour.tour_average_rating %>
+        </div>
+
         <p><%= @tour.description %></p>
-        <p><strong>Price of Tour: </strong><%= @tour.price %> € / person</p>
-        <p><strong>Location: </strong><%= @tour.location %></p>
+        <p><strong>Sights: </strong><%= @tour.sights %></p>
+
+        <p><strong>Category: </strong><%= @tour.category %></p>
+        <p><strong>Length: </strong><%= @tour.duration_in_hours %></p>
+        <%# <p><strong>Starting time: </strong><%= @tour.starting_time %>
+        <p><strong>Starting point: </strong><%= @tour.starting_point %></p>
+        <p><strong>Ending point: </strong><%= @tour.ending_point %></p>
+
+        <p><strong>Price: </strong><%= @tour.price %> € / person</p>
         <p class="text-popup"><strong>Tour Guide: </strong><%= link_to "#{@tour.user.first_name} #{@tour.user.last_name}", user_path(@tour.user) %></p>
     </div>
 
@@ -61,21 +75,41 @@
       </div>
     </div>
 
-    <div class="col-6 pb-4">
-      <h3>Reviews</h3>
+    <% if @reviews_tour.present? %>
+      <div class="pb-4">
+        <h3 class= "pb-3">Reviews</h3>
 
-      <% @reviews_tour.each do |review| %>
-        <strong><%= review.booking.user.first_name %></strong>
-        <p>Guide Rating: <%= review.guide_rating %></p>
-        <p>Tour Rating: <%= review.tour_rating %></p>
-        <p>Review: <%= review.review_content %></p>
-        <hr>
-      <% end %>
+        <% @reviews_tour.each do |review| %>
+        <div class="row">
+          <div class="d-flex col-sm-3 col-lg-1 py-2"><strong><%= review.booking.user.first_name %>:</strong></div>
+          <div class="d-flex col-sm-9 col-lg-11"> <p class="fw-lighter fst-italic py-2 text-start">"<%= review.review_content %>"</p></div>
+        </div>
 
-      <h3>Reviews average</h3>
-      <%= @tour.tour_average_rating %>
-    </div>
+          <p>
+            Tour:
+            <% review.tour_rating.to_i.times do  %>
+              <i class="bi bi-star-fill"></i>
+            <% end %>
+            (<%= review.tour_rating %>)
+          </p>
 
+          <p>
+            <%= link_to review.booking.tour.user.first_name, class: "btn btn-primary my-3" %>
+            <% review.guide_rating.to_i.times do  %>
+              <i class="bi bi-star-fill"></i>
+            <% end %>
+            (<%= review.guide_rating %>)
+          </p>
+
+          <hr>
+        <% end %>
+
+      </div>
+
+    <% else %>
+        <h3>Reviews</h3>
+        <p class="fw-light">There are no reviews for this tour yet.</p>
+    <% end %>
 
 
   </div>

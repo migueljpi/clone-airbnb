@@ -1,0 +1,44 @@
+<div class="form-container">
+  <%= simple_form_for [@booking, @tour, @review], url: tour_booking_reviews_path(@booking) do |f| %>
+  <h2 class="mb-4 text-start">How was your experience on <%=  @booking.tour.name %>?</h2>
+    <%= f.input :review_content, label: false %>
+    <%# <%= f.input :tour_rating, input_html: { type: 'number', step: 1 } %>
+
+    <!-- Star Rating for Tour -->
+    <div class="star-rating animated-stars">
+      <%= f.label :tour_rating, "Tour Rating" %><br>
+      <% (1..5).to_a.reverse.each do |i| %>
+        <input type="radio" id="tour_star<%= i %>" name="review[tour_rating]" value="<%= i %>">
+        <label for="tour_star<%= i %>" class="bi bi-star-fill"></label>
+      <% end %>
+    </div>
+
+    <!-- Star Rating for Guide -->
+    <div class="star-rating animated-stars">
+      <%= f.label :guide_rating, "Guide Rating" %><br>
+      <% (1..5).to_a.reverse.each do |i| %>
+        <input type="radio" id="guide_star<%= i %>" name="review[guide_rating]" value="<%= i %>">
+        <label for="guide_star<%= i %>" class="bi bi-star-fill"></label>
+      <% end %>
+    </div>
+
+    <%= f.submit "Leave a Review", class: "btn btn-secondary my-3" %>
+  <% end %>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.star-rating input').forEach((radio) => {
+        radio.addEventListener('change', function () {
+            // Optional: Add animation effect when a star is selected
+            let labels = this.closest('.star-rating').querySelectorAll('label');
+            labels.forEach(label => label.style.transform = 'scale(1)');
+            this.nextElementSibling.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                this.nextElementSibling.style.transform = 'scale(1)';
+            }, 200);
+        });
+    });
+});
+</script>

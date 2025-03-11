@@ -1,7 +1,10 @@
 <% @tours.each do |tour| %>
   <div class="col-6">
     <div class="card-trip m-3">
-      <%= cl_image_tag(tour.photo.key) %>
+      <%= link_to tour_path(tour) do %>
+        <%= image_tag(tour.photo) %>
+      <% end %>
+      <%#= cl_image_tag(tour.photo.key) %>
       <div class="card-trip-infos">
         <div class="card-trip-description">
           <div>

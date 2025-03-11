@@ -1,19 +1,24 @@
-    <div data-controller="map-modal">
+<div data-controller="map-modal">
   <button class="btn btn-back" data-action="click->map-modal#open">
-    Check the location on the map   <i class="fa-solid fa-location-dot"></i>
+    Check the location on the map <i class="fa-solid fa-location-dot"></i>
   </button>
 
-  <div class="modal-position d-none" data-map-modal-target="mapModal">
+  <!-- MODAL -->
+  <div class="modal-container d-none" data-map-modal-target="mapModal">
 
-        <button class="btn-close" data-action="click->map-modal#close">&times;</button>
-        <div class="col-6 pb-4">
-          <div data-controller="map"
-            id='map'
-            data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
-            data-map-markers-value="<%= @markers.to_json %>"
-            >
-          </div>
+    <!-- The magic: A simple dimming background inside the modal -->
+    <div class="modal-dimmer" data-action="click->map-modal#close"></div>
+
+    <div class="modal-position">
+      <button class="btn-close" data-action="click->map-modal#close">&times;</button>
+
+      <div class="col-6 pb-4">
+        <div data-controller="map"
+          id="map"
+          data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+          data-map-markers-value="<%= @markers.to_json %>">
         </div>
       </div>
-
+    </div>
+  </div>
 </div>

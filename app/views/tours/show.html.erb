@@ -64,7 +64,7 @@
 
     <% if @reviews_tour.present? %>
       <div class="pb-4">
-        <h3 class= "pb-3">Reviews (<%= @tour.tour_average_rating.round(1) %>)</h3>
+        <h3 class= "pb-3">Reviews (<%= @tour.tour_average_rating %>)</h3>
 
         <% @reviews_tour.each do |review| %>
         <div class="row">

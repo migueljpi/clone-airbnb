@@ -22,13 +22,13 @@
           </div>
         </div>
       <% end %>
+
     <% end %>
   </div>
   <% else %>
-    <h2>You have no bookings yet!</h2>
-    <h3>Get ready to explore the world. <%= link_to "Book a tour", root_path, style: "text-decoration: none"%></h3>
+    <h4><%= link_to "Book a tour", root_path, class: "btn btn-primary mt-3 mb-3"%></h4>
   <% end %>
 <% else %>
-  <p>You are not authorized to view this user's bookings</p>
+  <h4>You are not authorized to see this user's bookings</h4>
   <%# Eventually add in here the reviews that the client has made in the past %>
 <% end %>

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <%# LEFT COLUMN (Profile - 4 columns) %>
-    <div class="col-4 p-4 h-100" id="profile">
+    <div class="col-4 p-4" id="profile">
       <div class="sticky-top">
         <div class="p-4 d-flex flex-column align-items-center position-relative" id="profile-box">
           <% if current_user && current_user.id == @user.id %>
@@ -22,12 +22,18 @@
               <h3>Tour Guide</h3>
             <% end %>
           </div>
-          <div class="d-flex flex-column align-items-center" id="profile-info">
-            <p><strong>Speaks:</strong> <%= @user.language %></p>
-            <p><strong>About me:</strong> <%= @user.about_me %></p>
+          <div class="d-flex flex-column align-items-center text-center" id="profile-info">
+            <div class="mb-3 mt-2">
+              <h4>Speaks:</h4>
+              <h6><%= @user.language %></h6>
+            </div>
+            <div class="mb-3">
+              <h4>About me:</h4>
+              <h6><%= @user.about_me %></h6>
+            </div>
           </div>
           <% if current_user && current_user.id == @user.id %>
-            <div class="p-4 d-flex flex-row align-items-center justify-content-between" id="buttons">
+            <div class="p-2 d-flex flex-row align-items-center justify-content-between" id="buttons">
               <%= link_to "My Reviews", user_reviews_path(@user), class: "btn btn-secondary me-3" %>
               <%= link_to "Delete Profile", user_registration_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-delete" %>
             </div>
@@ -46,6 +52,7 @@
               <div class="mb-2">
                 <h2>Tours Provided</h2>
               </div>
+              <hr>
               <div class="row d-flex flex-wrap justify-content-start">
                 <%= render "tours_provided" %>
               </div>
@@ -55,9 +62,10 @@
         <div class="row">
           <div class="col-12">
             <div>
-              <div class="mb-2">
+              <div class="mb-2 mt-2">
                 <h2>Reviews</h2>
               </div>
+              <hr>
               <div class="row d-flex flex-wrap justify-content-start">
                 <%= render "reviews" %>
               </div>
@@ -68,24 +76,45 @@
         <%# START OF UPCOMING TOURS %>
         <div class="row">
           <div class="col-12">
+            <% if @user != current_user && !@user.guide %>
+              <div>
+                <div class="mb-2">
+                  <h2>Reviews</h2>
+                  <hr>
+                  <div class="mb-2 mt-2">
+                    <h4>What I think of these tours</h4>
+                  </div>
+                  <div class="row d-flex flex-wrap justify-content-start">
+                    <%# ORSI RENDER USER REVIEWS ON THIS LINE %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% else %>
             <div>
               <div class="mb-2">
                 <h2>Requested Tours</h2>
-                <h4>Get ready to explore the world.</h4>
+                <hr>
+                <div class="mb-2 mt-2">
+                  <h4>Get ready to explore the world</h4>
+                </div>
               </div>
               <div class="row d-flex flex-wrap justify-content-start">
                 <%= render "tourist_bought_bookings" %>
               </div>
             </div>
           </div>
-          <div class="col-12">
-            <div>
-              <div class="mb-2">
-                <h4>Don't forget to leave a review.</h4>
-              </div>
-              <div class="row d-flex flex-wrap justify-content-start">
-                <%= render "tourist_past_bookings" %>
-              </div>
+          <% if @user.bookings.any? { |booking| booking.date < Date.today } %>
+            <div class="col-12" id="to-review">
+              <div>
+                <div class="mb-2 mt-2">
+                  <h4>Don't forget to leave a review</h4>
+                </div>
+                <div class="row d-flex flex-wrap justify-content-start">
+                  <%= render "tourist_past_bookings" %>
+                </div>
+            <% end %>
+            <% end %>
 
 
 
@@ -96,13 +125,16 @@
         <div class="row">
           <div class="col-12">
             <div>
-              <div class="d-flex flex-row justify-content-between" >
-                <h2>Booking Management</h2>
-                <div class="mb-2">
+              <div class="d-flex flex-row align-items-center justify-content-between mt-5">
+                <h2 class="mb-2 mt-2">Booking Management</h2>
+                <div class="d-flex align-items-center">
                   <%= link_to "Create a new tour", new_tour_path, class: "btn btn-secondary" %>
                 </div>
               </div>
+              <hr>
+                <div class="mb-2 mt-2">
                   <h4>These tours require your attention</h4>
+                </div>
               <div class="row d-flex flex-wrap justify-content-start">
                 <%= render "guide_booked_tours" %>
               </div>
@@ -110,7 +142,7 @@
           </div>
           <div class="col-12">
             <div>
-              <div class="mb-2">
+              <div class="mb-2 mt-2">
                 <h4>Your past tours</h4>
               </div>
               <div class="row d-flex flex-wrap justify-content-start">
@@ -122,6 +154,9 @@
         <% end %>
         <%# END OF BOOKING MANAGEMENT %>
       <% end %>
-    </div> <%# END col-8 %>
-  </div> <%# END row %>
-</div> <%# END container %>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>

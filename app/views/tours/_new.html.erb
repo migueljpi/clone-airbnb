@@ -1,5 +1,5 @@
-<div class="container">
-  <h2>Sign up</h2>
+<div class="form-container">
+  <h2>Create your tour!</h2>
 
   <%= simple_form_for (@tour) do |f| %>
     <%= f.error_notification %>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="form-actions">
-      <%= f.button :submit, "Create" %>
+      <%= f.button :submit, "Create", class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>

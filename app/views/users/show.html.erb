@@ -1,17 +1,21 @@
 <div class="container">
   <div class="row">
-    <%# PERSONAL INFO (Left Side - Sticks to top when scrolling) %>
-    <div class="col-4 p-4" id="profile">
+    <%# LEFT COLUMN (Profile - 4 columns) %>
+    <div class="col-4 p-4 h-100" id="profile">
       <div class="sticky-top">
-        <div class="p-4 d-flex flex-column align-items-center" id="profile-box">
-          <div class="m-4">
+        <div class="p-4 d-flex flex-column align-items-center position-relative" id="profile-box">
+          <% if current_user && current_user.id == @user.id %>
+            <h1>
+              <%= link_to content_tag(:i, "", class: "fa-solid fa-pencil position-absolute top-0 end-0 mt-3 me-3"), edit_user_registration_path(@user) %>
+            </h1>
+          <% end %>
+          <div class="mb-4">
             <% if @user.photo.key? %>
               <%= cl_image_tag @user.photo.key, height: 300, width: 300, crop: :fill, class: "avatar-user-show" %>
             <% else %>
               <%= image_tag "https://plus.unsplash.com/premium_photo-1661764174171-c29f85bd8a37?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", height: 300, width: 300, class: "avatar-user-show" %>
             <% end %>
           </div>
-
           <div class="d-flex flex-column align-items-center mb-2">
             <h2><%= @user.first_name %> <%= @user.last_name %></h2>
             <% if @user.guide %>
@@ -22,111 +26,102 @@
             <p><strong>Speaks:</strong> <%= @user.language %></p>
             <p><strong>About me:</strong> <%= @user.about_me %></p>
           </div>
+          <% if current_user && current_user.id == @user.id %>
+            <div class="p-4 d-flex flex-row align-items-center justify-content-between" id="buttons">
+              <%= link_to "My Reviews", user_reviews_path(@user), class: "btn btn-secondary me-3" %>
+              <%= link_to "Delete Profile", user_registration_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-delete" %>
+            </div>
+          <% end %>
         </div>
-        <%# BUTTONS GO HERE %>
-        <% if current_user && current_user.id == @user.id %>
-          <div class="p-4 d-flex flex-column align-items-center sticky-top justify-content-center" id="buttons">
-            <% if current_user && @user.id == current_user.id && @user.guide  %>
-              <p><strong><%= link_to "Create a new tour", new_tour_path, class: "btn btn-secondary" %></strong></p>
-            <% end %>
-            <%= link_to "Edit Profile", edit_user_registration_path(@user), class: "btn btn-primary mb-3" %>
-            <%= link_to "Delete Profile", user_registration_path(@user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-delete mb-2" %>
-          </div>
-        <% end %>
-      </div> <%# END of Sticky Profile Box %>
-    </div> <%# END of Profile Column col-4 %>
+      </div>
+    </div> <%# END col-4 Profile %>
 
-    <%# PROVIDED TOURS AND REVIEWS %>
-    <div class="col-8 p-4 d-flex flex-column gap-4" id="bookings">
+    <%# RIGHT COLUMN (8 columns for Booking + Management) %>
+    <div class="col-8 p-4">
+      <%# BOOKING SECTION %>
       <% if !user_signed_in? || (@user.guide && @user.id != current_user.id) %>
         <div class="row">
           <div class="col-12">
-            <%# Provided Tours %>
-            <div class="p-4 gray-box-wrapper">
-              <div class="d-flex flex-column align-items-center mb-4">
-                <h2>Tours provided</h2>
+            <div>
+              <div class="mb-2">
+                <h2>Tours Provided</h2>
               </div>
-              <div class="row d-flex flex-wrap justify-content-center">
+              <div class="row d-flex flex-wrap justify-content-start">
                 <%= render "tours_provided" %>
               </div>
             </div>
           </div>
         </div>
-
-        <%# Reviews Section %>
         <div class="row">
           <div class="col-12">
-            <div class="p-4 management" >
-              <div class="d-flex flex-column align-items-center mb-4">
+            <div>
+              <div class="mb-2">
                 <h2>Reviews</h2>
               </div>
-              <div class="row d-flex flex-wrap justify-content-center">
+              <div class="row d-flex flex-wrap justify-content-start">
                 <%= render "reviews" %>
               </div>
             </div>
           </div>
         </div>
       <% else %>
+        <%# START OF UPCOMING TOURS %>
         <div class="row">
           <div class="col-12">
-            <%# UPCOMING TOURS (Inside col-8) %>
-            <div class="gray-box-wrapper">
-              <div class="d-flex flex-column align-items-center mb-2">
+            <div>
+              <div class="mb-2">
                 <h2>Requested Tours</h2>
+                <h4>Get ready to explore the world.</h4>
               </div>
-              <div class="row d-flex flex-wrap justify-content-center">
+              <div class="row d-flex flex-wrap justify-content-start">
                 <%= render "tourist_bought_bookings" %>
               </div>
             </div>
           </div>
-
-            <%# PAST TOURS (Inside col-8) %>
           <div class="col-12">
-            <div class="gray-box-wrapper">
-              <div class="d-flex flex-column align-items-center mb-2">
-                <h2>Past Tours</h2>
+            <div>
+              <div class="mb-2">
+                <h4>Don't forget to leave a review.</h4>
               </div>
-              <div class="row d-flex flex-wrap justify-content-center">
+              <div class="row d-flex flex-wrap justify-content-start">
                 <%= render "tourist_past_bookings" %>
-                <p><strong><%= link_to "My Reviews", user_reviews_path(@user), class: "btn btn-secondary" %></strong></p>
+              </div>
+
+
+
+        <%# END OF UPCOMING TOURS %>
+
+        <%# START OF BOOKING MANAGEMENT %>
+        <% if current_user.id == @user.id && @user.guide %>
+        <div class="row">
+          <div class="col-12">
+            <div>
+              <div class="d-flex flex-row justify-content-between" >
+                <h2>Booking Management</h2>
+                <div class="mb-2">
+                  <%= link_to "Create a new tour", new_tour_path, class: "btn btn-secondary" %>
+                </div>
+              </div>
+                  <h4>These tours require your attention</h4>
+              <div class="row d-flex flex-wrap justify-content-start">
+                <%= render "guide_booked_tours" %>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div>
+              <div class="mb-2">
+                <h4>Your past tours</h4>
+              </div>
+              <div class="row d-flex flex-wrap justify-content-start">
+                <%= render "guide_past_tours" %>
               </div>
             </div>
           </div>
         </div>
+        <% end %>
+        <%# END OF BOOKING MANAGEMENT %>
       <% end %>
-    <%# BOOKING MANAGEMENT SECTION %>
-      <% if @user.guide && current_user && @user.id == current_user.id %>
-        <div id="guide-booking-management" class="mt-5">
-          <div class="row">
-            <div class="col-12">
-              <div class="tour-guide-management p-4 mb-2 management">
-                <div class="d-flex justify-content-center align-items-center text-center">
-                  <h2>Booking Management</h2>
-                </div>
-                <div class="d-flex justify-content-center align-items-center text-center">
-                  <h4>Manage your upcoming tours</h4>
-                </div>
-                <div class="p-4 d-flex flex-wrap justify-content-center">
-                  <%= render "guide_booked_tours" %>
-                </div>
-              </div>
-            </div>
-          </div> <%# END of Guide Booking Management %>
-
-          <div class="row">
-            <div class="col-12">
-              <div class="tour-guide-management p-4 mb-2 management" >
-                <div class="d-flex justify-content-center align-items-center text-center">
-                  <h2>Past Bookings</h2>
-                </div>
-                <div class="p-4 d-flex flex-wrap justify-content-center">
-                  <%= render "guide_past_tours" %>
-                </div>
-              </div>
-            </div>
-          </div> <%# END of Guide Booking Management %>
-        </div>
-      <% end %>
-    </div> <%# END of Bookings Column col-8 %>
-  </div> <%# END of First Row %>
-</div> <%# END of Container %>
+    </div> <%# END col-8 %>
+  </div> <%# END row %>
+</div> <%# END container %>

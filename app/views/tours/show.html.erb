@@ -39,12 +39,22 @@
         <h2 class="pb-2">Tour Description</h2>
 
         <p><%= @tour.description %></p>
-        <p><strong>Sights: </strong><%= @tour.sights %></p>
+
+        <p><strong>Sights included: </strong>
+          <ul>
+            <% @tour.sights.split(';').each do |sight| %>
+              <li>
+                <%= sight.strip.split(",").first.strip %>
+              </li>
+            <% end %>
+          </ul>
+        </p>
+
         <p><strong>Category: </strong><%= @tour.category %></p>
         <p><strong>Length: </strong><%= @tour.duration_in_hours %> hours</p>
         <%# <p><strong>Starting time: </strong><%= @tour.starting_time %>
-        <p><strong>Starting point: </strong><%= @tour.starting_point %></p>
-        <p><strong>Ending point: </strong><%= @tour.ending_point %></p>
+        <p><strong>Starting point: </strong><%= @tour.starting_point.split(",").first.strip %></p>
+        <p><strong>Ending point: </strong><%= @tour.ending_point.split(",").first.strip %></p>
 
         <%= render 'shared/map_modal'%>
 

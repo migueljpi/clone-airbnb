@@ -573,31 +573,55 @@ tours.each do |tour|
   completed_booking = bookings.where(tour: tour, status: "Completed").sample
   if completed_booking && Review.where(booking: completed_booking).empty?
     review_content = case tour.category
-                     when "Walking Tour"
-                       ["A wonderful walking tour with great insights and beautiful sights.",
-                        "An enjoyable walk through the city's best spots.",
-                        "Loved the walking tour! The guide was very knowledgeable."].sample
-                     when "Van Tour"
-                       ["A comfortable van tour with excellent commentary and stops.",
-                        "Great van tour with plenty of interesting stops.",
-                        "The van tour was very comfortable and informative."].sample
-                     when "Bus Tour"
-                       ["A fantastic bus tour covering all the major attractions.",
-                        "The bus tour was well-organized and covered a lot of ground.",
-                        "Enjoyed the bus tour, saw all the main sights."].sample
-                     when "Free Tour"
-                       ["An amazing free tour with a knowledgeable guide.",
-                        "The free tour was excellent, learned a lot.",
-                        "Great free tour, the guide was very engaging."].sample
-                     when "Boat Tour"
-                       ["A relaxing boat tour with stunning views and great information.",
-                        "Loved the boat tour, very relaxing and informative.",
-                        "The boat tour was a highlight of our trip."].sample
-                     else
-                       ["An enjoyable tour with a great guide.",
-                        "The tour was very well-organized and enjoyable.",
-                        "Had a great time on the tour, the guide was excellent."].sample
-                     end
+                      when "Walking Tour"
+                        ["Such a great walking tour! The guide made history come alive.",
+                        "Perfect pace and awesome stories along the way. Highly recommend!",
+                        "Loved exploring on foot—felt like I really got to know the city.",
+                        "A fun and easy way to see all the best spots without missing anything.",
+                        "Felt like a local wandering through hidden gems. Great experience!",
+                        "So much cool info, but never felt overwhelming. Just a great time.",
+                        "Awesome mix of history, fun facts, and beautiful sights."] .sample
+                      when "Van Tour"
+                        ["Super comfy ride with great stories along the way. Worth it!",
+                        "Saw so much in just a few hours without feeling rushed. Perfect tour!",
+                        "Great way to explore without walking too much. Loved every stop!",
+                        "The guide was hilarious and knew so much. Made the trip even better!",
+                        "Didn’t expect to enjoy a van tour this much, but it was fantastic!",
+                        "Loved how easy and relaxed this was—no stress, just good vibes.",
+                        "Perfect for seeing a lot in one go. The guide kept it fun and interesting!"] .sample
+                      when "Bus Tour"
+                        ["Great way to see everything without exhausting yourself. Totally worth it!",
+                        "Loved how well-organized this was. Saw all the highlights with no hassle!",
+                        "The bus was comfy, and the guide was a pro. Learned so much!",
+                        "Such a fun way to cover a ton of ground. Highly recommend!",
+                        "The perfect mix of sightseeing and storytelling. Really enjoyed it!",
+                        "A must-do if you want to see the city without too much walking.",
+                        "Easy, informative, and fun! Covered way more than I expected."] .sample
+                      when "Free Tour"
+                        ["Can't believe this was free! The guide was incredible!",
+                        "Seriously one of the best tours I’ve been on. And it was free?!",
+                        "Great experience—felt like a paid tour, but without the price tag!",
+                        "Super engaging and informative. Totally worth tipping the guide!",
+                        "Loved how passionate the guide was. Made the whole tour special.",
+                        "One of the best ways to explore the city. Learned a ton!",
+                        "Such a great way to meet people and discover hidden gems."] .sample
+                      when "Boat Tour"
+                        ["Hands down the most relaxing way to see the city. Loved it!",
+                        "The views were unreal, and the guide had the best stories.",
+                        "Felt like a little escape from the busy city. So peaceful and fun!",
+                        "A perfect mix of sightseeing and just chilling on the water.",
+                        "Could’ve stayed on the boat all day—such a cool experience!",
+                        "A boat tour just hits different. Great vibe, great views, great info.",
+                        "100% the highlight of my trip. Highly recommend!"] .sample
+                      else
+                        ["Such a well-organized tour! Everything was smooth and enjoyable.",
+                        "Had a blast! The guide was funny, informative, and super engaging.",
+                        "Didn’t expect to enjoy this as much as I did. Really great tour!",
+                        "So glad I booked this—totally worth it and a great experience!",
+                        "Just the right balance of history, fun, and cool sights.",
+                        "Would absolutely do this again. The guide made it unforgettable!",
+                        "Exceeded my expectations in every way. Loved every second!"] .sample
+                      end
 
     review = Review.new(
       booking: completed_booking,
@@ -618,37 +642,61 @@ guides.each do |guide|
       completed_booking = bookings.where(tour: tour, status: "Completed").sample
       if completed_booking
         review_content = case tour.category
-                         when "Walking Tour"
-                           ["A wonderful walking tour with great insights and beautiful sights.",
-                            "An enjoyable walk through the city's best spots.",
-                            "Loved the walking tour! The guide was very knowledgeable."].sample
-                         when "Van Tour"
-                           ["A comfortable van tour with excellent commentary and stops.",
-                            "Great van tour with plenty of interesting stops.",
-                            "The van tour was very comfortable and informative."].sample
-                         when "Bus Tour"
-                           ["A fantastic bus tour covering all the major attractions.",
-                            "The bus tour was well-organized and covered a lot of ground.",
-                            "Enjoyed the bus tour, saw all the main sights."].sample
-                         when "Free Tour"
-                           ["An amazing free tour with a knowledgeable guide.",
-                            "The free tour was excellent, learned a lot.",
-                            "Great free tour, the guide was very engaging."].sample
-                         when "Boat Tour"
-                           ["A relaxing boat tour with stunning views and great information.",
-                            "Loved the boat tour, very relaxing and informative.",
-                            "The boat tour was a highlight of our trip."].sample
-                         else
-                           ["An enjoyable tour with a great guide.",
-                            "The tour was very well-organized and enjoyable.",
-                            "Had a great time on the tour, the guide was excellent."].sample
-                         end
+                          when "Walking Tour"
+                            ["Such a great walking tour! The guide made history come alive.",
+                            "Perfect pace and awesome stories along the way. Highly recommend!",
+                            "Loved exploring on foot—felt like I really got to know the city.",
+                            "A fun and easy way to see all the best spots without missing anything.",
+                            "Felt like a local wandering through hidden gems. Great experience!",
+                            "So much cool info, but never felt overwhelming. Just a great time.",
+                            "Awesome mix of history, fun facts, and beautiful sights."] .sample
+                          when "Van Tour"
+                            ["Super comfy ride with great stories along the way. Worth it!",
+                            "Saw so much in just a few hours without feeling rushed. Perfect tour!",
+                            "Great way to explore without walking too much. Loved every stop!",
+                            "The guide was hilarious and knew so much. Made the trip even better!",
+                            "Didn’t expect to enjoy a van tour this much, but it was fantastic!",
+                            "Loved how easy and relaxed this was—no stress, just good vibes.",
+                            "Perfect for seeing a lot in one go. The guide kept it fun and interesting!"] .sample
+                          when "Bus Tour"
+                            ["Great way to see everything without exhausting yourself. Totally worth it!",
+                            "Loved how well-organized this was. Saw all the highlights with no hassle!",
+                            "The bus was comfy, and the guide was a pro. Learned so much!",
+                            "Such a fun way to cover a ton of ground. Highly recommend!",
+                            "The perfect mix of sightseeing and storytelling. Really enjoyed it!",
+                            "A must-do if you want to see the city without too much walking.",
+                            "Easy, informative, and fun! Covered way more than I expected."] .sample
+                          when "Free Tour"
+                            ["Can't believe this was free! The guide was incredible!",
+                            "Seriously one of the best tours I’ve been on. And it was free?!",
+                            "Great experience—felt like a paid tour, but without the price tag!",
+                            "Super engaging and informative. Totally worth tipping the guide!",
+                            "Loved how passionate the guide was. Made the whole tour special.",
+                            "One of the best ways to explore the city. Learned a ton!",
+                            "Such a great way to meet people and discover hidden gems."] .sample
+                          when "Boat Tour"
+                            ["Hands down the most relaxing way to see the city. Loved it!",
+                            "The views were unreal, and the guide had the best stories.",
+                            "Felt like a little escape from the busy city. So peaceful and fun!",
+                            "A perfect mix of sightseeing and just chilling on the water.",
+                            "Could’ve stayed on the boat all day—such a cool experience!",
+                            "A boat tour just hits different. Great vibe, great views, great info.",
+                            "100% the highlight of my trip. Highly recommend!"] .sample
+                          else
+                            ["Such a well-organized tour! Everything was smooth and enjoyable.",
+                            "Had a blast! The guide was funny, informative, and super engaging.",
+                            "Didn’t expect to enjoy this as much as I did. Really great tour!",
+                            "So glad I booked this—totally worth it and a great experience!",
+                            "Just the right balance of history, fun, and cool sights.",
+                            "Would absolutely do this again. The guide made it unforgettable!",
+                            "Exceeded my expectations in every way. Loved every second!"] .sample
+                          end
 
         review = Review.new(
           booking: completed_booking,
           review_content: review_content,
-          tour_rating: Faker::Number.between(from: 3, to: 5),
-          guide_rating: Faker::Number.between(from: 3, to: 5)
+          tour_rating: Faker::Number.between(from: 4, to: 5),
+          guide_rating: Faker::Number.between(from: 4, to: 5)
         )
         review.save!
       end
@@ -660,37 +708,61 @@ end
 bookings.each do |booking|
   if booking.date < Date.today && booking.status == "Completed" && Review.where(booking: booking).empty?
     review_content = case booking.tour.category
-                     when "Walking Tour"
-                       ["A wonderful walking tour with great insights and beautiful sights.",
-                        "An enjoyable walk through the city's best spots.",
-                        "Loved the walking tour! The guide was very knowledgeable."].sample
-                     when "Van Tour"
-                       ["A comfortable van tour with excellent commentary and stops.",
-                        "Great van tour with plenty of interesting stops.",
-                        "The van tour was very comfortable and informative."].sample
-                     when "Bus Tour"
-                       ["A fantastic bus tour covering all the major attractions.",
-                        "The bus tour was well-organized and covered a lot of ground.",
-                        "Enjoyed the bus tour, saw all the main sights."].sample
-                     when "Free Tour"
-                       ["An amazing free tour with a knowledgeable guide.",
-                        "The free tour was excellent, learned a lot.",
-                        "Great free tour, the guide was very engaging."].sample
-                     when "Boat Tour"
-                       ["A relaxing boat tour with stunning views and great information.",
-                        "Loved the boat tour, very relaxing and informative.",
-                        "The boat tour was a highlight of our trip."].sample
-                     else
-                       ["An enjoyable tour with a great guide.",
-                        "The tour was very well-organized and enjoyable.",
-                        "Had a great time on the tour, the guide was excellent."].sample
-                     end
+                      when "Walking Tour"
+                        ["Such a great walking tour! The guide made history come alive.",
+                        "Perfect pace and awesome stories along the way. Highly recommend!",
+                        "Loved exploring on foot—felt like I really got to know the city.",
+                        "A fun and easy way to see all the best spots without missing anything.",
+                        "Felt like a local wandering through hidden gems. Great experience!",
+                        "So much cool info, but never felt overwhelming. Just a great time.",
+                        "Awesome mix of history, fun facts, and beautiful sights."] .sample
+                      when "Van Tour"
+                        ["Super comfy ride with great stories along the way. Worth it!",
+                        "Saw so much in just a few hours without feeling rushed. Perfect tour!",
+                        "Great way to explore without walking too much. Loved every stop!",
+                        "The guide was hilarious and knew so much. Made the trip even better!",
+                        "Didn’t expect to enjoy a van tour this much, but it was fantastic!",
+                        "Loved how easy and relaxed this was—no stress, just good vibes.",
+                        "Perfect for seeing a lot in one go. The guide kept it fun and interesting!"] .sample
+                      when "Bus Tour"
+                        ["Great way to see everything without exhausting yourself. Totally worth it!",
+                        "Loved how well-organized this was. Saw all the highlights with no hassle!",
+                        "The bus was comfy, and the guide was a pro. Learned so much!",
+                        "Such a fun way to cover a ton of ground. Highly recommend!",
+                        "The perfect mix of sightseeing and storytelling. Really enjoyed it!",
+                        "A must-do if you want to see the city without too much walking.",
+                        "Easy, informative, and fun! Covered way more than I expected."] .sample
+                      when "Free Tour"
+                        ["Can't believe this was free! The guide was incredible!",
+                        "Seriously one of the best tours I’ve been on. And it was free?!",
+                        "Great experience—felt like a paid tour, but without the price tag!",
+                        "Super engaging and informative. Totally worth tipping the guide!",
+                        "Loved how passionate the guide was. Made the whole tour special.",
+                        "One of the best ways to explore the city. Learned a ton!",
+                        "Such a great way to meet people and discover hidden gems."] .sample
+                      when "Boat Tour"
+                        ["Hands down the most relaxing way to see the city. Loved it!",
+                        "The views were unreal, and the guide had the best stories.",
+                        "Felt like a little escape from the busy city. So peaceful and fun!",
+                        "A perfect mix of sightseeing and just chilling on the water.",
+                        "Could’ve stayed on the boat all day—such a cool experience!",
+                        "A boat tour just hits different. Great vibe, great views, great info.",
+                        "100% the highlight of my trip. Highly recommend!"] .sample
+                      else
+                        ["Such a well-organized tour! Everything was smooth and enjoyable.",
+                        "Had a blast! The guide was funny, informative, and super engaging.",
+                        "Didn’t expect to enjoy this as much as I did. Really great tour!",
+                        "So glad I booked this—totally worth it and a great experience!",
+                        "Just the right balance of history, fun, and cool sights.",
+                        "Would absolutely do this again. The guide made it unforgettable!",
+                        "Exceeded my expectations in every way. Loved every second!"] .sample
+                      end
 
     review = Review.new(
       booking: booking,
       review_content: review_content,
       tour_rating: Faker::Number.between(from: 3, to: 5),
-      guide_rating: Faker::Number.between(from: 3, to: 5)
+      guide_rating: Faker::Number.between(from: 4, to: 5)
     )
     review.save!
   end

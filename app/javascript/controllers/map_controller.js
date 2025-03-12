@@ -18,7 +18,7 @@ export default class extends Controller {
     })
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
-    this.#drawLineBetweenMarkers()
+    // this.#drawLineBetweenMarkers()
   }
 
   #fitMapToMarkers() {

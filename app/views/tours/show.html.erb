@@ -4,6 +4,7 @@
 
   <!-- Row for Image & Booking Form -->
   <div class="row d-flex align-items-stretch">
+
     <!-- Tour Image -->
     <div class="col-sm-12 col-md-6 d-flex align-items-center">
       <div class="tour-img">
@@ -12,41 +13,33 @@
     </div>
 
     <!-- Booking Form / Sign-Up -->
-    <%# <div class="col-sm-12 col-md-6"> %>
-      <%# <div id="tour-show-booking-form"> %>
-      <div class="col-sm-12 col-md-6 d-flex align-items-center">
-        <div id="form-booking" class="form-container w-100 h-100 d-flex flex-column justify-content-center">
-          <% if user_signed_in? %>
-            <h2 class="py-3 text-center">Book This Tour</h2>
-            <div class="d-flex justify-content-center">
-              <%= simple_form_for [@tour, @booking], url: tour_bookings_path(@tour) do |f| %>
-                <%= f.input :date, as: :string, input_html: { data: { controller: "datepicker" } } %>
-                <%= f.input :pax, input_html: { type: 'number', step: 1 }, label: "Number of participants" %>
-                <div class="text-center">
-                  <%= f.submit "Book", class: "btn btn-action mt-2 btn-lg"%>
-                </div>
-              <% end %>
-            </div>
-          <% else %>
-            <h5 class="pt-5 pb-2 text-center">Login to book a tour</h5>
-            <div class="d-flex align-items-center justify-content-center">
-              <%= link_to "Login", new_user_session_path, class: "btn btn-action btn-lg my-2" %>
-            </div>
-          <% end %>
-        </div>
+    <div class="col-sm-12 col-md-6 d-flex align-items-center">
+      <div id="form-booking" class="form-container w-100 h-100 d-flex flex-column justify-content-center">
+        <% if user_signed_in? %>
+          <h2 class="py-3 text-center">Book This Tour</h2>
+          <div class="d-flex justify-content-center">
+            <%= simple_form_for [@tour, @booking], url: tour_bookings_path(@tour) do |f| %>
+              <%= f.input :date, as: :string, input_html: { data: { controller: "datepicker" } } %>
+              <%= f.input :pax, input_html: { type: 'number', step: 1 }, label: "Number of participants" %>
+              <div class="text-center">
+                <%= f.submit "Book", class: "btn btn-action mt-2 btn-lg"%>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <h5 class="pt-5 pb-2 text-center">Login to book a tour</h5>
+          <div class="d-flex align-items-center justify-content-center">
+            <%= link_to "Login", new_user_session_path, class: "btn btn-action btn-lg my-2" %>
+          </div>
+        <% end %>
       </div>
+    </div>
 
-  <%# </div> %>
-
-  <%# <div class="row my-5"> %>
-    <%# <div class="two-columns pb-4"> %>
     <div class="tour-description col-sm-12 col-md-6 my-5 px-4">
-      <%# <div class=""> %>
         <h2 class="pb-2">Tour Description</h2>
 
         <p><%= @tour.description %></p>
         <p><strong>Sights: </strong><%= @tour.sights %></p>
-
         <p><strong>Category: </strong><%= @tour.category %></p>
         <p><strong>Length: </strong><%= @tour.duration_in_hours %> hours</p>
         <%# <p><strong>Starting time: </strong><%= @tour.starting_time %>
@@ -57,40 +50,33 @@
 
         <p style="margin-top: 1rem;"><strong>Price: </strong><%= @tour.price %> €/person</p>
         <p class="text-popup"><strong>Tour Guide: </strong><%= link_to "#{@tour.user.first_name} #{@tour.user.last_name}", user_path(@tour.user) %></p>
-    </div>
+      </div>
 
     <div class="col-sm-12 col-md-6 my-5 px-4">
-    <h3>Reviews
+      <h3>Reviews
 
-    <% if @reviews_tour.present? %>
-
-          <% if @tour.tour_average_rating.present? %>
-            (<%= @tour.tour_average_rating %>)
-          <% end %>
+      <% if @reviews_tour.present? %>
+        <% if @tour.tour_average_rating.present? %>
+          (<%= @tour.tour_average_rating %>)
+        <% end %>
         </h3>
         <% @reviews_tour.each do |review| %>
-        <hr>
-
-        <div class="row">
-          <div class="d-flex col-sm-2 col-lg-2 py-2 pe-0"><p class="fw-bolder"><%= review.booking.user.first_name %>:</p></div>
-          <div class="d-flex col-sm-10 col-lg-9 py-2 px-0">
-            <%= render "shared/review_content", review: review %>
+          <hr>
+          <div class="row">
+            <div class="d-flex col-sm-2 col-lg-2 py-2 pe-0"><p class="fw-bolder"><%= review.booking.user.first_name %>:</p></div>
+            <div class="d-flex col-sm-10 col-lg-9 py-2 px-0">
+              <%= render "shared/review_content", review: review %>
+            </div>
           </div>
-        </div>
 
-        <%= render "shared/review_stars", review: review %>
-
+          <%= render "shared/review_stars", review: review %>
         <% end %>
 
+      <% else %>
+        </h3>
+        <p class="fw-light">There are no reviews for this tour yet.</p>
+      <% end %>
 
-    <% else %>
-      </h3>
-      <p class="fw-light">There are no reviews for this tour yet.</p>
-    <% end %>
-
-          </div>
-            </div>
-
-
-
+    </div>
+  </div>
 </div>

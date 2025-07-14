@@ -29,6 +29,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/credentials.yml.enc
 
 # Ignore .env file containing credentials.
 /.env
@@ -36,3 +37,5 @@
 # Ignore Mac and Linux file system files
 *.swp
 .DS_Store
+
+/config/credentials/production.key

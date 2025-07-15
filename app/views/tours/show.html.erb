@@ -56,7 +56,7 @@
         <p><strong>Starting point: </strong><%= @tour.starting_point.split(",").first.strip %></p>
         <p><strong>Ending point: </strong><%= @tour.ending_point.split(",").first.strip %></p>
 
-        <%# <%= render 'shared/map_modal'%> %>
+        <%# <%= render 'shared/map_modal'%>
 
         <p style="margin-top: 1rem;"><strong>Price: </strong><%= @tour.price %> €/person</p>
         <p class="text-popup"><strong>Tour Guide: </strong><%= link_to "#{@tour.user.first_name} #{@tour.user.last_name}", user_path(@tour.user) %></p>
